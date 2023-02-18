@@ -1,60 +1,18 @@
-pub fn sum_it(left: isize, right: isize) -> isize {
-    if (left <= isize::MAX || right <= isize::MAX) && left + right < isize::MAX {
-        left + right
-    } else {
-        //panic!("Boundary value exceeded!");
-        -1
-    }
-}
-
-trait Kind {
-    fn is_humane(&self, psychometric_trait_attribute: i8) -> bool;
-}
-
-pub struct Body {
-    pub vertibral_column: bool,
-    pub arms: u8,
-    pub legs: u8,
-}
-
-pub struct Human {
-    pub head: bool,
-    pub body: Body,
-}
-
-impl Kind for Human {
-    fn is_humane(&self, psychometric_trait_attribute: i8) -> bool {
-        if psychometric_trait_attribute > 0 {
-            true
-        } else {
-            false
-        }
-    }
-}
-
+pub mod geo;
+mod origin;
+mod alien;
+    
 #[cfg(test)]
 mod tests {
-    use crate::{sum_it, Human, Body, Kind};
-    
-    #[test]
-    fn it_works() {
-        let result = sum_it(2,
-             2);
-        assert_eq!(result, 4);
-              
-    }
+    use crate::{origin::life::tree::{{/*sum_it, */Human, Body, Kind}}, geo::graph::while_hole::milky_way::galaxy::solar_system::Planet};
+    use crate::alien::unknown::vacuum::{Known};
 
-    #[test]
-    fn it_works_nevative_add_negative_must_result_negative() {
-        assert_eq!(sum_it(-2, -2), -4);
-    }
-
-    // #[test]
-    // #[should_panic(expected = "Override default panic handler!")]
-    // fn boundary_value_analysis() {
-    //     let result: isize = add(isize::MAX, isize::MAX);
-    //     assert_eq!(result, -1);
-    // }
+    /// #[test]
+    /// fn test_sum_it() {
+    ///     let result = sum_it(2,
+    ///          8);
+    ///     assert_eq!(result, 255);
+    /// }
 
     #[test]
     fn test_as_byte_array_from_string() {
@@ -93,6 +51,20 @@ mod tests {
         };
 
         assert_eq!(human.is_humane(-1), false);
+
+        let some = Some(8u8);
+        assert_eq!(some.unwrap(), 8)
+    }
+
+    #[test]
+    fn test_alien_is_known() {
+        let alien = Known(true);
+        assert_eq!(alien.0, true);
+    }
+
+    fn test_planet() {
+        let mercury = Planet(true);
+        mercury.slice();
     }
 
 }
