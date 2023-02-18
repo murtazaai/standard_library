@@ -15,3 +15,6 @@ r = "run"
 # space_example = ["run", "--release", "--", "\"command list\""]
 
 [dependencies]
+
+[profile.release]
+# panic = 'abort'

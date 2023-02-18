@@ -3,6 +3,7 @@ pub mod graph {
         pub mod milky_way {
             pub mod galaxy {
                 pub mod solar_system {
+
                     pub enum Pole {
                         North,
                         East,
@@ -15,17 +16,22 @@ pub mod graph {
                     }
                     pub struct Rhombus(bool);
 
-                    pub trait Sphere {
-                        fn slice() -> Rhombus;
-                    }
+                    // pub trait Sphere {
+                    //     fn slice(do_it: bool) -> Result<Rhombus, ErrorKind>() {
+                    //         match do_it {
+                    //             true => Rhombus(true),
+                    //             false => ErrorKind::NotFound,
+                    //         }       
+                    //     }
+                    // }
 
-                    pub struct Planet(pub bool);
+                    /// pub struct Planet(pub bool);
 
-                    impl Sphere for Planet {
-                        fn slice() -> Rhombus {
-                            Rhombus(true)
-                        }
-                    }
+                    // impl Sphere for Planet {
+                    //     fn slice() -> Rhombus {
+                    //         Rhombus(true)
+                    //     }
+                    // }
                 
                     pub mod star {}
 

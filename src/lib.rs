@@ -1,10 +1,13 @@
+mod bug;
 pub mod geo;
 mod origin;
 mod alien;
     
 #[cfg(test)]
 mod tests {
-    use crate::{origin::life::tree::{{/*sum_it, */Human, Body, Kind}}, geo::graph::while_hole::milky_way::galaxy::solar_system::Planet};
+    use std::collections::HashMap;
+
+    use crate::{origin::life::tree::{{/*sum_it, */Human, Body, Kind}}};
     use crate::alien::unknown::vacuum::{Known};
 
     /// #[test]
@@ -52,8 +55,23 @@ mod tests {
 
         assert_eq!(human.is_humane(-1), false);
 
-        let some = Some(8u8);
-        assert_eq!(some.unwrap(), 8)
+        // assert_eq!(human.chopp_header(), true);
+
+        let mut scores: HashMap<_, _> = HashMap::new();
+
+        scores.insert(human.head, human.body);
+
+        scores.entry(human.head);//.or_insert(human.head, human.body);
+
+        assert_ne!(scores.capacity(), usize::MIN);
+
+        let panic = Some(8u8);
+
+        // let f = match panic {
+        //     _ => 8
+        // };
+        assert_eq!(panic.unwrap(), 8);
+
     }
 
     #[test]
@@ -62,9 +80,17 @@ mod tests {
         assert_eq!(alien.0, true);
     }
 
-    fn test_planet() {
-        let mercury = Planet(true);
-        mercury.slice();
+    #[test]
+    fn test_unicode_transformation_format_8() {
+        let 你好 = String::from("你好");
+        assert_eq!(你好, "你好".to_string());
+        // let 交換 = 你好.as_bytes();
+        // assert_eq!(交換[0], 0x4EA4);
     }
+
+    // fn test_planet() {
+    //     let mercury = Planet(true);
+    //     mercury.slice();
+    // }
 
 }

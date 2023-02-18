@@ -10,6 +10,7 @@ pub mod life {
         
         pub trait Kind {
             fn is_humane(&self, psychometric_trait_attribute: i8) -> bool;
+            // fn chopp_header(/*Fn: f*/order: bool) -> bool;
         }
         
         pub struct Body {
@@ -31,6 +32,13 @@ pub mod life {
                     false
                 }
             }
+
+            // fn chopp_header(why: bool) -> bool {
+            //     // let ohoo = f;
+            //     match why {
+            //         _ => true
+            //     }
+            // }
         }
         
     }
