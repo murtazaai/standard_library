@@ -1,58 +1,38 @@
-use std::io::{Read, Error};
+use core::panic;
+use std::{fs::File, io::Read, io::Error};
 
-enum Result<T, E> {
-    Ok(T),
-    Err(E),
+pub fn read_file(path: String) -> Result<String, Error>{
+    let file_result = File::open(path);
+
+    let mut buf = String::new();
+    file_result.unwrap().read_to_string(&mut buf)?;
+    Ok(buf)
 }
 
-// fn rocket() -> Result<String, Error> {
-//     let ipfs = std::fs::File::open("./Cargo.toml");
+pub fn result_okay() -> Result<(), ()>{
+    Ok(())
+}
 
-//     let file = match  ipfs {
-//         Ok(f) => {
-//             let mut buf = String::new;
-//             f.read_to_string(buf);
-//             Ok(buf)
-//         },
-//         Err(e) => {
-//                 error
-//         }
-//     };
+// use std::net::IpAddr;
+
+// pub fn validate_ipaddress() {
+//     let ip_addr: IpAddr = "192.168.1.1".parse().expect("IP address should be valid!");
+//     assert_eq!(ip_addr, IpAddr::from("192.168.1.1"));
 // }
 
-fn diagonalDifference(arr: &[Vec<i32>]) -> i32 {
-    
-    let mut diagonal_x: i32 = 0;
-    let mut diagonal_y: i32 = 0;
-
-    let mut index_x = 0;
-    let mut index_y = 0;
-
-    let mut index_l = 0;
-    
-    let mut index_m = arr.len();
-
-    while index_x < arr.len() {
-        
-        let index_y_l = arr[index_x].len();
-        
-        
-        while index_y < arr[index_x].len() {
-            if index_x == index_y {
-                diagonal_x += arr[index_x][index_y];
-            }
-
-            if index_l < arr[index_x].len() && 0 <= index_m  {
-                diagonal_y = arr[index_m-index_x][index_y+index_l];
-                index_l -= 1;
-                index_m += 1;
-            }
-
-            index_y += 1;
+pub fn parse_string_to_i32(string: String) -> i32{
+    let result: i32 = match string.trim().parse() {
+        Ok(integer) => integer,
+        Err(err) => {
+            panic!("{:?}", err);
         }
-
-        index_x += 1;
-    }
-
-    (diagonal_x - diagonal_y).abs()
+    };
+    result
 }
+
+
+// pub fn str_array_zeroth_element(str: &str) -> u8 {
+//     let u8_array = str.as_bytes();
+//     let a = u8_array[0];
+//     a
+// }

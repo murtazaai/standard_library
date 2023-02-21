@@ -1,3 +1,4 @@
+mod publication;
 mod bug;
 pub mod geo;
 mod origin;
@@ -5,10 +6,10 @@ mod alien;
     
 #[cfg(test)]
 mod tests {
-    use std::collections::HashMap;
+    use std::{collections::HashMap};
 
-    use crate::{origin::life::tree::{{/*sum_it, */Human, Body, Kind}}};
-    use crate::alien::unknown::vacuum::{Known};
+    use crate::{origin::life::tree::{{/*sum_it, */Human, Body, Kind}}, bug::{read_file, result_okay, parse_string_to_i32, }, publication::{Article, notify, implement_display_plus_clone_plus_debug}};
+    use crate::alien::unknown::vacuum::Known;
 
     /// #[test]
     /// fn test_sum_it() {
@@ -88,9 +89,65 @@ mod tests {
         // assert_eq!(交換[0], 0x4EA4);
     }
 
+    #[test]
+    fn read_file_gitignore() {
+        let path = String::from("./.gitignore");
+        
+        let result = read_file(path.clone());
+        let content = result.unwrap();
+
+        // assert_eq!(content.as_str().lines().chars().last(), '\n');
+
+        assert_eq!(content.clone(), "/target\n/Cargo.lock\n.vscode\n");
+
+        let result_empty = Ok(());
+
+        assert_eq!(result_okay(), result_empty);
+    }
+
+    #[test]
+    fn testparse_string_to_i32() {
+        assert_eq!(parse_string_to_i32(String::from("8")), 8);
+    }
+
+    #[test]
+    fn test_power() {
+        assert_eq!(2i32.pow(2u32), 4i32);       
+    }
+
     // fn test_planet() {
     //     let mercury = Planet(true);
     //     mercury.slice();
     // }
+
+    #[test]
+    fn test_str_array_zeroth_element() {
+        // let expected: u8 = b"48";
+        // assert_eq!(str_array_zeroth_element("01"), expected);
+    }
+
+    // #[test]
+    // fn test_article() {
+    //     let article = Article {
+    //         headline: String::from("Article 1"),
+    //         location: String::from("Citation 1"),
+    //         author: String::from("Author 1"),
+    //         content: String::from("Content 1"), 
+    //     };
+    
+    //     assert_eq!(notify(article), format!("Article 1, Citation 1, Author 1, Content 1"));
+    // }
+
+    #[test]
+    fn test_implement_display_plus_clone_plus_debug() {
+        struct S1(u8);
+        struct S2(u8);
+
+        let s1 = S1(1);
+        let s2 = S2(2);
+
+        implement_display_plus_clone_plus_debug<>();
+    }
+
 
 }
