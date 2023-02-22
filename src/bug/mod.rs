@@ -1,4 +1,5 @@
 use core::panic;
+use std::ops::Deref;
 use std::{fs::File, io::Read, io::Error};
 
 pub fn read_file(path: String) -> Result<String, Error>{
@@ -30,6 +31,52 @@ pub fn parse_string_to_i32(string: String) -> i32 {
     result
 }
 
+pub fn lifetime<'a>(x: &'a str) -> &'a str {
+    x
+}
+
+pub fn borrow_lifetime() {
+    let x = "hello!";
+    let x = lifetime(x);
+    println!("{}", x.to_string())
+}
+
+use std::fmt::Debug;
+
+trait T {}
+
+#[derive(Clone)]
+pub struct S {}
+
+impl T for S {}
+
+impl Debug for S {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("S").finish()
+    }
+}
+
+pub type Type = S;
+
+pub fn function<'a>(in_1: &'a Type/* , mut out_1: &'a Type */) -> &'a Type
+where  
+    Type: Clone + Debug
+{
+    let out_1 = in_1;
+    out_1
+}
+
+// struct BlueBox<T>(T);
+
+// impl Deref for BlueBox<T> {
+//     fn new(box: BlueBox<T>) {
+
+//     }
+// }
+
+pub fn deref() {
+    
+}
 
 // pub fn str_array_zeroth_element(str: &str) -> u8 {
 //     let u8_array = str.as_bytes();

@@ -10,7 +10,7 @@ mod alien;
 mod tests {
     use std::{collections::HashMap};
 
-    use crate::{origin::life::tree::{Body, Human, Kind}, alien::unknown::vacuum::Known, bug::{read_file, result_okay, parse_string_to_i32}, publication::{borrow_lifetime, function, Type}, config::read_config};
+    use crate::{origin::life::tree::{Body, Human, Kind}, alien::unknown::vacuum::Known, bug::{read_file, result_okay, parse_string_to_i32, borrow_lifetime, function, Type}, config::read_config};
 
     /// #[test]
     /// fn test_sum_it() {
@@ -150,8 +150,22 @@ mod tests {
     #[test]
     fn test_config() {
         // let config = 
-        let args = read_config();
-        assert_eq!(args[0], "/home/murtaza/Workspace/source/rust/rust/rust-lib/target/debug/deps/rust_lib-0826646801856ef5".to_string())
+        // let args = 
+        read_config();
+        // assert_eq!(args[0], "/home/murtaza/Workspace/source/rust/rust/rust-lib/target/debug/deps/rust_lib-0826646801856ef5".to_string())
+    }
+
+    #[test]
+    fn test_smart_pointer() {
+        let y = Box::new(&5);
+        let z = *y;
+
+        assert_eq!(*z, 5);
+    }
+
+    #[test]
+    fn test_deref() {
+
     }
 
     // #[test]

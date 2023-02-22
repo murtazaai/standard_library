@@ -1,38 +1,3 @@
-pub fn lifetime<'a>(x: &'a str) -> &'a str {
-    x
-}
-
-pub fn borrow_lifetime() {
-    let x = "hello!";
-    let x = lifetime(x);
-    println!("{}", x.to_string())
-}
-
-use std::fmt::Debug;
-
-trait T {}
-
-#[derive(Clone)]
-pub struct S {}
-
-impl T for S {}
-
-impl Debug for S {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("S").finish()
-    }
-}
-
-pub type Type = S;
-
-pub fn function<'a>(in_1: &'a Type/* , mut out_1: &'a Type */) -> &'a Type
-where  
-    Type: Clone + Debug
-{
-    let out_1 = in_1;
-    out_1
-}
-
 // pub trait Summary {
 //     fn summarize(&self) -> String;
 // }
