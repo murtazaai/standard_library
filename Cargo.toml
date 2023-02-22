@@ -15,6 +15,7 @@ r = "run"
 # space_example = ["run", "--release", "--", "\"command list\""]
 
 [dependencies]
+merkletree = "0.22.1"
 
 [profile.release]
 # panic = 'abort'

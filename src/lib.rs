@@ -1,6 +1,8 @@
+mod store;
+mod config;
 mod publication;
 mod bug;
-pub mod geo;
+mod geo;
 mod origin;
 mod alien;
     
@@ -8,8 +10,7 @@ mod alien;
 mod tests {
     use std::{collections::HashMap};
 
-    use crate::{origin::life::tree::{{/*sum_it, */Human, Body, Kind}}, bug::{read_file, result_okay, parse_string_to_i32, }, publication::{Article, notify, implement_display_plus_clone_plus_debug}};
-    use crate::alien::unknown::vacuum::Known;
+    use crate::{origin::life::tree::{Body, Human, Kind}, alien::unknown::vacuum::Known, bug::{read_file, result_okay, parse_string_to_i32}, publication::{borrow_lifetime, function, Type}, config::read_config};
 
     /// #[test]
     /// fn test_sum_it() {
@@ -126,6 +127,33 @@ mod tests {
         // assert_eq!(str_array_zeroth_element("01"), expected);
     }
 
+    #[test]
+    fn test_borrow_lifetime() {
+        borrow_lifetime();
+
+        let in_1 = Type {};
+        // let mut out_1 = Type {};
+
+        function(&in_1);
+
+        // assert_eq!(return_1, &in_1.clone());
+    }
+
+    #[test]
+    fn test_ascii() {
+
+
+        let x = "a".as_bytes();
+        assert_eq!(x[0], 97);
+    }
+
+    #[test]
+    fn test_config() {
+        // let config = 
+        let args = read_config();
+        assert_eq!(args[0], "/home/murtaza/Workspace/source/rust/rust/rust-lib/target/debug/deps/rust_lib-0826646801856ef5".to_string())
+    }
+
     // #[test]
     // fn test_article() {
     //     let article = Article {
@@ -138,16 +166,25 @@ mod tests {
     //     assert_eq!(notify(article), format!("Article 1, Citation 1, Author 1, Content 1"));
     // }
 
-    #[test]
-    fn test_implement_display_plus_clone_plus_debug() {
-        struct S1(u8);
-        struct S2(u8);
+    // #[test]
+    // fn test_implement_display_plus_clone_plus_debug() {
+    //     let t = Turkey {
+    //         val: 1,
+    //     };
+    //     let u = Uganda {
+    //         val: 2,
+    //     };
 
-        let s1 = S1(1);
-        let s2 = S2(2);
+    //     implement_display_plus_clone_plus_debug<Turkey, Uganda>(t, u);
+    // }
 
-        implement_display_plus_clone_plus_debug<>();
-    }
+    // #[test]
+    // fn test_largest() {
+
+    //     let x = &[X{x: 0}, X{x: 1}, X{x: 2}, X{x: 3}, X{x: 4}, X{x: 5}, X{x: 6}, X{x: 7}, X{x: 8}, X{x: 9}];
+    //     assert_eq!(largest(x), 6);
+    // }
+
 
 
 }

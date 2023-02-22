@@ -1,3 +1,38 @@
+pub fn lifetime<'a>(x: &'a str) -> &'a str {
+    x
+}
+
+pub fn borrow_lifetime() {
+    let x = "hello!";
+    let x = lifetime(x);
+    println!("{}", x.to_string())
+}
+
+use std::fmt::Debug;
+
+trait T {}
+
+#[derive(Clone)]
+pub struct S {}
+
+impl T for S {}
+
+impl Debug for S {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("S").finish()
+    }
+}
+
+pub type Type = S;
+
+pub fn function<'a>(in_1: &'a Type/* , mut out_1: &'a Type */) -> &'a Type
+where  
+    Type: Clone + Debug
+{
+    let out_1 = in_1;
+    out_1
+}
+
 // pub trait Summary {
 //     fn summarize(&self) -> String;
 // }
@@ -25,20 +60,36 @@
 //     item.summarize()
 // }
 
-// use std::fmt::{Display, Debug};
+// use std::fmt::{Display, Debug, Formatter, Result};
 
-// pub struct T(u8);
-// pub struct U(u8);
+// #[derive(Debug, Clone)]
+// pub struct Turkey {
+//     pub val: u8,
+// }
 
-// pub fn implement_display_plus_clone_plus_debug<T: Display + Clone, U: Display + Debug>(t: &T, u: &U) {
+// #[derive(Debug, Clone)]
+// pub struct Uganda {
+//     pub val: u8,
+// }
 
-//     impl Display for U {
-//         fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-//           write!(f, "{}", self.0)
-//         }
+// impl Display for Turkey {
+//     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+//       write!(f, "{}", self.val)
 //     }
+// }
 
-//     println!("{:?}, {:?}", t, u);
+// impl Display for Uganda {
+//     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+//       write!(f, "{}", self.val)
+//     }
+// }
+
+// pub fn implement_display_plus_clone_plus_debug::<T, U>(t: &T, u: &U) 
+// where 
+//     T: Turkey, 
+//     U: Uganda,
+// {
+//     println!("{}, {}", t.val, u.val);
 // }
 
 

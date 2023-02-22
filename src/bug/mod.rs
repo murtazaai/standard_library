@@ -20,7 +20,7 @@ pub fn result_okay() -> Result<(), ()>{
 //     assert_eq!(ip_addr, IpAddr::from("192.168.1.1"));
 // }
 
-pub fn parse_string_to_i32(string: String) -> i32{
+pub fn parse_string_to_i32(string: String) -> i32 {
     let result: i32 = match string.trim().parse() {
         Ok(integer) => integer,
         Err(err) => {
