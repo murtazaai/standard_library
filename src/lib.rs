@@ -1,3 +1,4 @@
+mod thread_pool;
 mod store;
 mod config;
 mod publication;
@@ -8,9 +9,10 @@ mod alien;
     
 #[cfg(test)]
 mod tests {
-    use std::{collections::HashMap};
+    use std::{collections::HashMap, cell::RefCell, rc::Weak, thread, time::Duration, sync::{Arc, mpsc::{self, Sender, Receiver}, Mutex}};
 
-    use crate::{origin::life::tree::{Body, Human, Kind}, alien::unknown::vacuum::Known, bug::{read_file, result_okay, parse_string_to_i32, borrow_lifetime, function, Type}, config::read_config};
+    use crate::{origin::life::tree::{Body, Human, Kind}, alien::unknown::vacuum::Known, bug::{read_file, result_okay, parse_string_to_i32, borrow_lifetime, function, Type, deref, List, List1, ListDS, new_list_ds, Node}, config::read_config, thread_pool::{send_message_on_channel, receive_message_on_channel}};
+    use std::rc::Rc;
 
     /// #[test]
     /// fn test_sum_it() {
@@ -165,9 +167,108 @@ mod tests {
 
     #[test]
     fn test_deref() {
+        assert_eq!(deref(), 8);
+    }
+
+    #[test]
+    fn test_ref_counter() {
+
+        let list = List::Cons(8, Box::new(List::Nil));
+
+        let list_1 = Rc::new(List1::Cons(8, Rc::new(List1::Nil)));
+        
+        assert_eq!(Rc::strong_count(&list_1), 1);
+        assert_eq!(Rc::weak_count(&list_1), 0);
+
+        let list_2 = &list_1.clone();
+
+        assert_eq!(Rc::strong_count(&list_1), 2);
+        assert_eq!(Rc::weak_count(&list_1), 0);
 
     }
 
+    #[test]
+    fn test_ref_cell() {
+        let ref_cell = RefCell::new(vec!["Hello!".to_string()]);
+        ref_cell.borrow_mut().push(String::from("Hello 1"));
+        let string = &ref_cell.borrow()[1];
+        assert_eq!(*string, String::from("Hello 1"));
+
+        // let ref_cell_1 = new_list_ds(8);
+    }
+
+    #[test]
+    fn test_node() {
+        let actual_node = Node::new();
+
+        let expected_node = Node {
+            val: 0,
+            parent: RefCell::new(Weak::new()),
+            child: RefCell::new(vec![]),
+        };
+
+        assert_eq!(actual_node.val, expected_node.val);
+    }
+
+    #[test]
+    fn test_thread_join() {
+        let (sender, receiver): (Sender<i32>, Receiver<i32>) = mpsc::channel();
+
+        send_message_on_channel(sender);
+
+        let actual = receive_message_on_channel(receiver);
+
+        let expected = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        for i in 0..actual.len()-1 {
+            let actual = actual[i];
+            assert!(expected.contains(&actual));
+        } 
+    }   
+
+    #[test]
+    fn test_mutex() {
+        let mutex = Mutex::new(1);
+
+        let mut locked_mutex = mutex.lock().unwrap();
+
+        *locked_mutex = 2;
+
+        assert_eq!(*locked_mutex, 2);
+
+    }
+
+    pub struct ImplMutex<T: ?Sized> {
+        inner: std::sys::Mutex,
+        poison: poison::Flag,
+        data: UnsafeCell<T>,
+    }
+
+    impl Copy for Mutex<i32> {}
+
+    #[test]
+    fn test_mutex_thread_handle_join() {
+
+        let mutex = Mutex::new(0);
+
+        for _ in 0..10 {
+
+            let join_handle = thread::spawn(move || {
+
+                let mut number = mutex.lock().unwrap();
+
+                *number += 1;
+            });
+
+            join_handle.join().unwrap();
+
+            assert_eq!(*mutex.lock().unwrap(), 9);
+        }
+
+        
+
+    }          
+   
     // #[test]
     // fn test_article() {
     //     let article = Article {
@@ -199,6 +300,25 @@ mod tests {
     //     assert_eq!(largest(x), 6);
     // }
 
+    // fn miniMaxSum(arr: &[i32]) {
+        
+    //     let n = arr.len();
+
+    //     let mut min_sum = i32::MAX;
+    //     let mut max_sum = i32::MIN;
+
+    //     for i in 0..n-1 {
+    //         let sum = arr.iter().skip(arr[i].try_into().unwrap()).sum::<i32>();
 
 
+    //          if sum < min_sum {
+    //             min_sum = sum;
+    //          }
+    //          if sum > max_sum {
+    //             max_sum = sum;
+    //          }
+    //     }
+        
+    //     println!("{} {}", min_sum, max_sum);
+    // }
 }

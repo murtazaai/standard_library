@@ -1,5 +1,7 @@
 use core::panic;
+use std::cell::RefCell;
 use std::ops::Deref;
+use std::rc::{Rc, Weak};
 use std::{fs::File, io::Read, io::Error};
 
 pub fn read_file(path: String) -> Result<String, Error>{
@@ -66,20 +68,136 @@ where
     out_1
 }
 
-// struct BlueBox<T>(T);
+struct BlueBox<T>(T);
 
-// impl Deref for BlueBox<T> {
-//     fn new(box: BlueBox<T>) {
+impl<T> BlueBox<T> {
+    fn new(t: T) -> BlueBox<T> {
+        BlueBox(t)
+    }
+}
 
-//     }
+impl<T> Deref for BlueBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl<T> Drop for BlueBox<T> {
+    fn drop(&mut self) {
+        // println!("{}", &self.0);
+    }
+}
+
+pub fn deref() -> u8 {
+    let bluebox = BlueBox::new(8u8);
+    *bluebox.deref()
+}
+
+pub enum List {
+    Cons(i32, Box<List>), 
+    Nil,
+}
+
+pub enum List1 {
+    Cons(i32, Rc<List1>), 
+    Nil,
+}
+
+pub enum ListDS {
+    Val(i32, RefCell<Rc<ListDS>>),
+    Nil,
+}
+
+impl ListDS {
+    fn new(val :i32) -> ListDS {
+        Self::Val(val, RefCell::new(Rc::new(Self::Nil)))
+    }
+
+    // fn val(&self) -> i32 {
+    //     let mut val = 0;
+    //     Self::Val(val, _<_<_>>);
+    //     val
+    // }
+
+    fn iterate(&self) -> Option<&RefCell<Rc<ListDS>>> {
+        match self {
+            Self::Val(val, rc) => Some(rc),
+            Self::Nil => None,
+        }
+    }
+}
+
+pub fn new_list_ds(val: i32) -> ListDS {
+    ListDS::new(val)
+}
+
+pub struct Node {
+    pub val: i32,
+    pub parent: RefCell<Weak<Node>>,
+    pub child: RefCell<Vec<Rc<Node>>>,
+}
+
+impl Node {
+
+    pub fn new() -> Node {
+        Node {
+            val: 0,
+            parent: RefCell::new(Weak::new()),
+            child: RefCell::new(vec![]),
+        }
+    }
+  
+}
+
+// pub fn list_ds_val(list_ds: ListDS) {
+//     list_ds
 // }
 
-pub fn deref() {
-    
-}
+// pub fn iterate_list_ds(list_ds: ListDS) -> Option<RefCell<Rc<ListDS>>> {
+//     let option = list_ds.iterate();
+
+//     let rc = match option {
+//         Some(x) => {
+//             let y = x.as_ptr();
+//         },
+//         None => {
+//             *RefCell::new(Rc::new(ListDS::Nil)).as_ptr()
+//         }
+//     };
+//     Some(Ref)
+// }
 
 // pub fn str_array_zeroth_element(str: &str) -> u8 {
 //     let u8_array = str.as_bytes();
 //     let a = u8_array[0];
 //     a
+// }
+
+// fn miniMaxSum(arr: &[i32]) {
+
+//     let n = arr.len();
+//     let sum: Vec<i32> = vec![];
+
+//     let mut min_sum = arr[0];
+//     let mut max_sum = arr[0];
+
+//     let mut sum = 0;
+
+//     for i in 0..n-1 {        
+//         sum += arr[i];        
+//     }
+
+//     for i in 0..n-1 {
+//         let num = sum - arr[i];
+
+//         if num < min_sum {
+//             min_sum = sum;
+//         } else if num > max_sum {
+//             max_sum = num;
+//         }
+//     } 
+    
+//     println!("{} {}", min_sum, max_sum);
 // }
