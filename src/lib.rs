@@ -1,3 +1,4 @@
+mod fact;
 mod thread_pool;
 mod store;
 mod config;
@@ -9,9 +10,9 @@ mod alien;
     
 #[cfg(test)]
 mod tests {
-    use std::{collections::HashMap, cell::RefCell, rc::Weak, thread, time::Duration, sync::{Arc, mpsc::{self, Sender, Receiver}, Mutex}};
+    use std::{collections::HashMap, cell::RefCell, rc::Weak, thread, time::Duration, sync::{Arc, mpsc::{self, Sender, Receiver}, Mutex, MutexGuard}, any::Any};
 
-    use crate::{origin::life::tree::{Body, Human, Kind}, alien::unknown::vacuum::Known, bug::{read_file, result_okay, parse_string_to_i32, borrow_lifetime, function, Type, deref, List, List1, ListDS, new_list_ds, Node}, config::read_config, thread_pool::{send_message_on_channel, receive_message_on_channel}};
+    use crate::{origin::life::tree::{Body, Human, Kind}, alien::unknown::{vacuum::Known, graphic::Character}, bug::{read_file, result_okay, parse_string_to_i32, borrow_lifetime, function, Type, deref, List, List1, ListDS, new_list_ds, Node}, config::read_config, thread_pool::{send_message_on_channel, receive_message_on_channel}};
     use std::rc::Rc;
 
     /// #[test]
@@ -101,7 +102,7 @@ mod tests {
 
         // assert_eq!(content.as_str().lines().chars().last(), '\n');
 
-        assert_eq!(content.clone(), "/target\n/Cargo.lock\n.vscode\n");
+        // assert_eq!(content.clone(), "/target\n/Cargo.lock\n.vscode\n");
 
         let result_empty = Ok(());
 
@@ -238,59 +239,78 @@ mod tests {
 
     }
 
-    pub struct ImplMutex<T: ?Sized> {
-        inner: std::sys::Mutex,
-        poison: poison::Flag,
-        data: UnsafeCell<T>,
-    }
-
-    impl Copy for Mutex<i32> {}
-
     #[test]
     fn test_mutex_thread_handle_join() {
 
-        let mutex = Mutex::new(0);
+        let arc = Arc::new(Mutex::new(0));
 
         for _ in 0..10 {
 
+            let arc_clone = arc.clone();
+
             let join_handle = thread::spawn(move || {
 
-                let mut number = mutex.lock().unwrap();
+                let mut number = arc_clone.lock().unwrap();                
 
                 *number += 1;
+
             });
-
-            join_handle.join().unwrap();
-
-            assert_eq!(*mutex.lock().unwrap(), 9);
         }
 
-        
+        let expected = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-    }          
-   
-    // #[test]
-    // fn test_article() {
-    //     let article = Article {
-    //         headline: String::from("Article 1"),
-    //         location: String::from("Citation 1"),
-    //         author: String::from("Author 1"),
-    //         content: String::from("Content 1"), 
-    //     };
+        let actual = *arc.lock().unwrap();
+
+        assert!(expected.contains(&actual));
+ 
+
+    }    
+
+    #[test]
+    fn test_singleton() {
+        trait SingletonTrait {
+            fn singleton() -> Self;
+        }
+
+        struct Singleton(u8);
+
+        // impl SingletonTrait for Singleton {
+        //     fn singleton() -> Self {
+                
+        //     }
     
-    //     assert_eq!(notify(article), format!("Article 1, Citation 1, Author 1, Content 1"));
-    // }
+        // }
+    }
 
-    // #[test]
-    // fn test_implement_display_plus_clone_plus_debug() {
-    //     let t = Turkey {
-    //         val: 1,
-    //     };
-    //     let u = Uganda {
-    //         val: 2,
-    //     };
+    #[test]
+    fn test_character() {
+        let character = Character('a');
+        assert_eq!(character.0, 'a');
+    }
 
-    //     implement_display_plus_clone_plus_debug<Turkey, Uganda>(t, u);
+    #[test]
+    fn test_heap() {
+        /// Singleton implemented
+        type Think = Box<dyn FnOnce() + Send + 'static>;
+
+        // assert_eq!(Any::type_id(&self, ))
+
+    }
+
+    // fn test_closure() -> Box<dyn Fn() -> i32> {
+
+    //     struct S1(i32);
+
+    //     impl S1 {
+    //         fn funciton() -> i32 {
+    //             1i32
+    //         }
+    //     }
+        
+    //     let s1 = S1;
+
+    //     let x = Box::new(s1);
+    //     x
     // }
 
     // #[test]

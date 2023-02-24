@@ -16,6 +16,6 @@ r = "run"
 
 [dependencies]
 merkletree = "0.22.1"
-
+substring = "1.4.5"
 [profile.release]
 # panic = 'abort'
