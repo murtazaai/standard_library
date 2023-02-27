@@ -4,23 +4,48 @@ use std::ops::Deref;
 use std::rc::{Rc, Weak};
 use std::{fs::File, io::Read, io::Error};
 
-pub fn read_file(path: String) -> Result<String, Error>{
-    let file_result = File::open(path);
+    //     let x = &[X{x: 0}, X{x: 1}, X{x: 2}, X{x: 3}, X{x: 4}, X{x: 5}, X{x: 6}, X{x: 7}, X{x: 8}, X{x: 9}];
+    //     assert_eq!(largest(x), 6);
+    // }
 
-    let mut buf = String::new();
-    file_result.unwrap().read_to_string(&mut buf)?;
-    Ok(buf)
-}
+    // fn miniMaxSum(arr: &[i32]) {
+        
+    //     let n = arr.len();
 
-pub fn result_okay() -> Result<(), ()>{
-    Ok(())
-}
+    //     let mut min_sum = i32::MAX;
+    //     let mut max_sum = i32::MIN;
 
-// use std::net::IpAddr;
+    //     for i in 0..n-1 {
+    //         let sum = arr.iter().skip(arr[i].try_into().unwrap()).sum::<i32>();
+
+
+    //          if sum < min_sum {
+    //             min_sum = sum;
+    //          }
+    //          if sum > max_sum {
+    //             max_sum = sum;
+    //          }
+    //     }
+        
+    //     println!("{} {}", min_sum, max_sum);
+
+    // use std::net::IpAddr;
 
 // pub fn validate_ipaddress() {
 //     let ip_addr: IpAddr = "192.168.1.1".parse().expect("IP address should be valid!");
 //     assert_eq!(ip_addr, IpAddr::from("192.168.1.1"));
+// }
+
+// pub fn read_file(path: String) -> Result<String, Error>{
+//     let file_result = File::open(path);
+
+//     let mut buf = String::new();
+//     file_result.unwrap().read_to_string(&mut buf)?;
+//     Ok(buf)
+// }
+
+// pub fn result_okay() -> Result<(), ()>{
+//     Ok(())
 // }
 
 pub fn parse_string_to_i32(string: String) -> i32 {
@@ -95,43 +120,37 @@ pub fn deref() -> u8 {
     *bluebox.deref()
 }
 
-pub enum List {
-    Cons(i32, Box<List>), 
-    Nil,
-}
+// pub enum List {
+//     Cons(i32, Box<List>), 
+//     Nil,
+// }
 
 pub enum List1 {
     Cons(i32, Rc<List1>), 
     Nil,
 }
 
-pub enum ListDS {
-    Val(i32, RefCell<Rc<ListDS>>),
-    Nil,
-}
+// pub enum ListDS {
+//     Val(i32, RefCell<Rc<ListDS>>),
+//     Nil,
+// }
 
-impl ListDS {
-    fn new(val :i32) -> ListDS {
-        Self::Val(val, RefCell::new(Rc::new(Self::Nil)))
-    }
+// impl ListDS {
+//     fn new(val :i32) -> ListDS {
+//         Self::Val(val, RefCell::new(Rc::new(Self::Nil)))
+//     }
 
-    // fn val(&self) -> i32 {
-    //     let mut val = 0;
-    //     Self::Val(val, _<_<_>>);
-    //     val
-    // }
+//     fn iterate(&self) -> Option<&RefCell<Rc<ListDS>>> {
+//         match self {
+//             Self::Val(val, rc) => Some(rc),
+//             Self::Nil => None,
+//         }
+//     }
+// }
 
-    fn iterate(&self) -> Option<&RefCell<Rc<ListDS>>> {
-        match self {
-            Self::Val(val, rc) => Some(rc),
-            Self::Nil => None,
-        }
-    }
-}
-
-pub fn new_list_ds(val: i32) -> ListDS {
-    ListDS::new(val)
-}
+// pub fn new_list_ds(val: i32) -> ListDS {
+//     ListDS::new(val)
+// }
 
 pub struct Node {
     pub val: i32,
@@ -173,31 +192,4 @@ impl Node {
 //     let u8_array = str.as_bytes();
 //     let a = u8_array[0];
 //     a
-// }
-
-// fn miniMaxSum(arr: &[i32]) {
-
-//     let n = arr.len();
-//     let sum: Vec<i32> = vec![];
-
-//     let mut min_sum = arr[0];
-//     let mut max_sum = arr[0];
-
-//     let mut sum = 0;
-
-//     for i in 0..n-1 {        
-//         sum += arr[i];        
-//     }
-
-//     for i in 0..n-1 {
-//         let num = sum - arr[i];
-
-//         if num < min_sum {
-//             min_sum = sum;
-//         } else if num > max_sum {
-//             max_sum = num;
-//         }
-//     } 
-    
-//     println!("{} {}", min_sum, max_sum);
 // }

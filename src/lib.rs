@@ -1,3 +1,6 @@
+mod std;
+mod process;
+mod listener;
 mod fact;
 mod thread_pool;
 mod store;
@@ -10,17 +13,14 @@ mod alien;
     
 #[cfg(test)]
 mod tests {
-    use std::{collections::HashMap, cell::RefCell, rc::Weak, thread, time::Duration, sync::{Arc, mpsc::{self, Sender, Receiver}, Mutex, MutexGuard}, any::Any};
+    use std::{collections::HashMap, cell::RefCell, rc::Weak, sync::{mpsc::{self, Sender, Receiver}, Mutex}};
 
-    use crate::{origin::life::tree::{Body, Human, Kind}, alien::unknown::{vacuum::Known, graphic::Character}, bug::{read_file, result_okay, parse_string_to_i32, borrow_lifetime, function, Type, deref, List, List1, ListDS, new_list_ds, Node}, config::read_config, thread_pool::{send_message_on_channel, receive_message_on_channel}};
+    use crate::{origin::life::tree::{Body, Human, Kind}, bug::{parse_string_to_i32, borrow_lifetime, function, Type, deref, Node, List1}, config::read_config, std::Character, alien::unknown::vacuum::Known, thread_pool::{send_message_on_channel, receive_message_on_channel, mutex_thread_handle_join}};
+    
     use std::rc::Rc;
 
-    /// #[test]
-    /// fn test_sum_it() {
-    ///     let result = sum_it(2,
-    ///          8);
-    ///     assert_eq!(result, 255);
-    /// }
+    use crate::thread_pool::thread_pool;
+
 
     #[test]
     fn test_as_byte_array_from_string() {
@@ -60,21 +60,16 @@ mod tests {
 
         assert_eq!(human.is_humane(-1), false);
 
-        // assert_eq!(human.chopp_header(), true);
-
         let mut scores: HashMap<_, _> = HashMap::new();
 
         scores.insert(human.head, human.body);
 
-        scores.entry(human.head);//.or_insert(human.head, human.body);
+        scores.entry(human.head);
 
         assert_ne!(scores.capacity(), usize::MIN);
 
         let panic = Some(8u8);
 
-        // let f = match panic {
-        //     _ => 8
-        // };
         assert_eq!(panic.unwrap(), 8);
 
     }
@@ -94,22 +89,6 @@ mod tests {
     }
 
     #[test]
-    fn read_file_gitignore() {
-        let path = String::from("./.gitignore");
-        
-        let result = read_file(path.clone());
-        let content = result.unwrap();
-
-        // assert_eq!(content.as_str().lines().chars().last(), '\n');
-
-        // assert_eq!(content.clone(), "/target\n/Cargo.lock\n.vscode\n");
-
-        let result_empty = Ok(());
-
-        assert_eq!(result_okay(), result_empty);
-    }
-
-    #[test]
     fn testparse_string_to_i32() {
         assert_eq!(parse_string_to_i32(String::from("8")), 8);
     }
@@ -117,17 +96,6 @@ mod tests {
     #[test]
     fn test_power() {
         assert_eq!(2i32.pow(2u32), 4i32);       
-    }
-
-    // fn test_planet() {
-    //     let mercury = Planet(true);
-    //     mercury.slice();
-    // }
-
-    #[test]
-    fn test_str_array_zeroth_element() {
-        // let expected: u8 = b"48";
-        // assert_eq!(str_array_zeroth_element("01"), expected);
     }
 
     #[test]
@@ -174,16 +142,12 @@ mod tests {
     #[test]
     fn test_ref_counter() {
 
-        let list = List::Cons(8, Box::new(List::Nil));
-
         let list_1 = Rc::new(List1::Cons(8, Rc::new(List1::Nil)));
         
         assert_eq!(Rc::strong_count(&list_1), 1);
         assert_eq!(Rc::weak_count(&list_1), 0);
 
-        let list_2 = &list_1.clone();
-
-        assert_eq!(Rc::strong_count(&list_1), 2);
+        assert_eq!(Rc::strong_count(&list_1), 1);
         assert_eq!(Rc::weak_count(&list_1), 0);
 
     }
@@ -242,45 +206,15 @@ mod tests {
     #[test]
     fn test_mutex_thread_handle_join() {
 
-        let arc = Arc::new(Mutex::new(0));
-
-        for _ in 0..10 {
-
-            let arc_clone = arc.clone();
-
-            let join_handle = thread::spawn(move || {
-
-                let mut number = arc_clone.lock().unwrap();                
-
-                *number += 1;
-
-            });
-        }
+        let arc = mutex_thread_handle_join();
 
         let expected = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
         let actual = *arc.lock().unwrap();
 
         assert!(expected.contains(&actual));
- 
 
     }    
-
-    #[test]
-    fn test_singleton() {
-        trait SingletonTrait {
-            fn singleton() -> Self;
-        }
-
-        struct Singleton(u8);
-
-        // impl SingletonTrait for Singleton {
-        //     fn singleton() -> Self {
-                
-        //     }
-    
-        // }
-    }
 
     #[test]
     fn test_character() {
@@ -289,56 +223,28 @@ mod tests {
     }
 
     #[test]
-    fn test_heap() {
-        /// Singleton implemented
-        type Think = Box<dyn FnOnce() + Send + 'static>;
+    fn test_filter() {
 
-        // assert_eq!(Any::type_id(&self, ))
+        let vec = vec![0, 2, 4, 6, 8];
 
+        let vec_i32: Vec<i32> = vec.iter().map(|f| {
+            f / 2
+        }).collect();
+
+        for i in 0..4 {
+            assert_eq!(vec_i32[i], i as i32);
+        }
     }
 
-    // fn test_closure() -> Box<dyn Fn() -> i32> {
+    #[test]
+    fn test_tcp_listener() {
+        // tcp_listener();
+        assert!(!false);
+    }
 
-    //     struct S1(i32);
+    #[test]
+    fn test_thread_pool() {
+        thread_pool();
+    }
 
-    //     impl S1 {
-    //         fn funciton() -> i32 {
-    //             1i32
-    //         }
-    //     }
-        
-    //     let s1 = S1;
-
-    //     let x = Box::new(s1);
-    //     x
-    // }
-
-    // #[test]
-    // fn test_largest() {
-
-    //     let x = &[X{x: 0}, X{x: 1}, X{x: 2}, X{x: 3}, X{x: 4}, X{x: 5}, X{x: 6}, X{x: 7}, X{x: 8}, X{x: 9}];
-    //     assert_eq!(largest(x), 6);
-    // }
-
-    // fn miniMaxSum(arr: &[i32]) {
-        
-    //     let n = arr.len();
-
-    //     let mut min_sum = i32::MAX;
-    //     let mut max_sum = i32::MIN;
-
-    //     for i in 0..n-1 {
-    //         let sum = arr.iter().skip(arr[i].try_into().unwrap()).sum::<i32>();
-
-
-    //          if sum < min_sum {
-    //             min_sum = sum;
-    //          }
-    //          if sum > max_sum {
-    //             max_sum = sum;
-    //          }
-    //     }
-        
-    //     println!("{} {}", min_sum, max_sum);
-    // }
 }

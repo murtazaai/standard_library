@@ -17,5 +17,6 @@ r = "run"
 [dependencies]
 merkletree = "0.22.1"
 substring = "1.4.5"
+threadpool = "1.8.1"
 [profile.release]
 # panic = 'abort'
