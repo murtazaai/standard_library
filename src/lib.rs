@@ -16,7 +16,7 @@ mod alien;
 mod tests {
     use std::{collections::HashMap, cell::RefCell, sync::{mpsc::{self, Sender, Receiver}, Mutex}};
 
-    use crate::{origin::life::tree::{Body, Human, Kind}, bug::{parse_string_to_i32, borrow_lifetime, function, Type, deref, Node, List}, config::read_config, std::Character, thread_pool::{send_message_on_channel, receive_message_on_channel, mutex_thread_handle_join}};
+    use crate::{origin::life::tree::{Body, Human, Kind}, bug::{parse_string_to_i32, borrow_lifetime, function, Type, deref, Node, List}, config::read_config, std::Character, thread_pool::{send_message_on_channel, receive_message_on_channel, mutex_thread_handle_join}, listener::tcp_listener};
     
     use std::rc::Rc;
 
@@ -228,14 +228,18 @@ mod tests {
     }
 
     #[test]
-    fn test_tcp_listener() {
-        // tcp_listener();
-        assert!(!false);
-    }
-
-    #[test]
     fn test_thread_pool() {
         thread_pool();
     }
+
+    #[test]
+    fn test_tcp_listener() {
+        tcp_listener();
+
+        
+
+        assert!(!false);
+    }
+
 
 }
