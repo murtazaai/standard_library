@@ -5,15 +5,6 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[alias]     # command aliases
-b = "build"
-c = "check"
-t = "test"
-r = "run"
-# rr = "run --release"
-# recursive_example = "rr --example recursions"
-# space_example = ["run", "--release", "--", "\"command list\""]
-
 [dependencies]
 merkletree = "0.22.1"
 substring = "1.4.5"

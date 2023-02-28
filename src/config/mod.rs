@@ -6,6 +6,7 @@
 
 use std::env;
 
+#[allow(warnings)]
 pub fn read_config() -> Vec<String> {
     // let is_case_sensitive = false;
 

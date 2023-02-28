@@ -2,52 +2,8 @@ use core::panic;
 use std::cell::RefCell;
 use std::ops::Deref;
 use std::rc::{Rc, Weak};
-use std::{fs::File, io::Read, io::Error};
 
-    //     let x = &[X{x: 0}, X{x: 1}, X{x: 2}, X{x: 3}, X{x: 4}, X{x: 5}, X{x: 6}, X{x: 7}, X{x: 8}, X{x: 9}];
-    //     assert_eq!(largest(x), 6);
-    // }
-
-    // fn miniMaxSum(arr: &[i32]) {
-        
-    //     let n = arr.len();
-
-    //     let mut min_sum = i32::MAX;
-    //     let mut max_sum = i32::MIN;
-
-    //     for i in 0..n-1 {
-    //         let sum = arr.iter().skip(arr[i].try_into().unwrap()).sum::<i32>();
-
-
-    //          if sum < min_sum {
-    //             min_sum = sum;
-    //          }
-    //          if sum > max_sum {
-    //             max_sum = sum;
-    //          }
-    //     }
-        
-    //     println!("{} {}", min_sum, max_sum);
-
-    // use std::net::IpAddr;
-
-// pub fn validate_ipaddress() {
-//     let ip_addr: IpAddr = "192.168.1.1".parse().expect("IP address should be valid!");
-//     assert_eq!(ip_addr, IpAddr::from("192.168.1.1"));
-// }
-
-// pub fn read_file(path: String) -> Result<String, Error>{
-//     let file_result = File::open(path);
-
-//     let mut buf = String::new();
-//     file_result.unwrap().read_to_string(&mut buf)?;
-//     Ok(buf)
-// }
-
-// pub fn result_okay() -> Result<(), ()>{
-//     Ok(())
-// }
-
+#[allow(warnings)]
 pub fn parse_string_to_i32(string: String) -> i32 {
     let result: i32 = match string.trim().parse() {
         Ok(integer) => integer,
@@ -58,10 +14,12 @@ pub fn parse_string_to_i32(string: String) -> i32 {
     result
 }
 
+#[allow(warnings)]
 pub fn lifetime<'a>(x: &'a str) -> &'a str {
     x
 }
 
+#[allow(warnings)]
 pub fn borrow_lifetime() {
     let x = "hello!";
     let x = lifetime(x);
@@ -83,8 +41,10 @@ impl Debug for S {
     }
 }
 
+#[allow(warnings)]
 pub type Type = S;
 
+#[allow(warnings)]
 pub fn function<'a>(in_1: &'a Type/* , mut out_1: &'a Type */) -> &'a Type
 where  
     Type: Clone + Debug
@@ -95,6 +55,7 @@ where
 
 struct BlueBox<T>(T);
 
+#[allow(warnings)]
 impl<T> BlueBox<T> {
     fn new(t: T) -> BlueBox<T> {
         BlueBox(t)
@@ -115,18 +76,15 @@ impl<T> Drop for BlueBox<T> {
     }
 }
 
+#[allow(warnings)]
 pub fn deref() -> u8 {
     let bluebox = BlueBox::new(8u8);
     *bluebox.deref()
 }
 
-// pub enum List {
-//     Cons(i32, Box<List>), 
-//     Nil,
-// }
-
-pub enum List1 {
-    Cons(i32, Rc<List1>), 
+#[allow(warnings)]
+pub enum List {
+    Cons(i32, Rc<List>), 
     Nil,
 }
 
@@ -152,44 +110,32 @@ pub enum List1 {
 //     ListDS::new(val)
 // }
 
+#[allow(dead_code)]
 pub struct Node {
+
     pub val: i32,
-    pub parent: RefCell<Weak<Node>>,
-    pub child: RefCell<Vec<Rc<Node>>>,
+    
+    parent: RefCell<Weak<Node>>,
+    
+    child: RefCell<Vec<Rc<Node>>>,
+
 }
 
+#[allow(warnings)]
 impl Node {
 
-    pub fn new() -> Node {
+    pub fn new(i: i32) -> Node {
+
         Node {
-            val: 0,
+
+            val: i,
+
             parent: RefCell::new(Weak::new()),
+
             child: RefCell::new(vec![]),
+
         }
+
     }
   
 }
-
-// pub fn list_ds_val(list_ds: ListDS) {
-//     list_ds
-// }
-
-// pub fn iterate_list_ds(list_ds: ListDS) -> Option<RefCell<Rc<ListDS>>> {
-//     let option = list_ds.iterate();
-
-//     let rc = match option {
-//         Some(x) => {
-//             let y = x.as_ptr();
-//         },
-//         None => {
-//             *RefCell::new(Rc::new(ListDS::Nil)).as_ptr()
-//         }
-//     };
-//     Some(Ref)
-// }
-
-// pub fn str_array_zeroth_element(str: &str) -> u8 {
-//     let u8_array = str.as_bytes();
-//     let a = u8_array[0];
-//     a
-// }

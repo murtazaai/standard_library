@@ -1,3 +1,4 @@
+mod puzzle;
 mod std;
 mod process;
 mod listener;
@@ -13,9 +14,9 @@ mod alien;
     
 #[cfg(test)]
 mod tests {
-    use std::{collections::HashMap, cell::RefCell, rc::Weak, sync::{mpsc::{self, Sender, Receiver}, Mutex}};
+    use std::{collections::HashMap, cell::RefCell, sync::{mpsc::{self, Sender, Receiver}, Mutex}};
 
-    use crate::{origin::life::tree::{Body, Human, Kind}, bug::{parse_string_to_i32, borrow_lifetime, function, Type, deref, Node, List1}, config::read_config, std::Character, alien::unknown::vacuum::Known, thread_pool::{send_message_on_channel, receive_message_on_channel, mutex_thread_handle_join}};
+    use crate::{origin::life::tree::{Body, Human, Kind}, bug::{parse_string_to_i32, borrow_lifetime, function, Type, deref, Node, List}, config::read_config, std::Character, thread_pool::{send_message_on_channel, receive_message_on_channel, mutex_thread_handle_join}};
     
     use std::rc::Rc;
 
@@ -72,12 +73,6 @@ mod tests {
 
         assert_eq!(panic.unwrap(), 8);
 
-    }
-
-    #[test]
-    fn test_alien_is_known() {
-        let alien = Known(true);
-        assert_eq!(alien.0, true);
     }
 
     #[test]
@@ -142,7 +137,7 @@ mod tests {
     #[test]
     fn test_ref_counter() {
 
-        let list_1 = Rc::new(List1::Cons(8, Rc::new(List1::Nil)));
+        let list_1 = Rc::new(List::Cons(8, Rc::new(List::Nil)));
         
         assert_eq!(Rc::strong_count(&list_1), 1);
         assert_eq!(Rc::weak_count(&list_1), 0);
@@ -164,13 +159,9 @@ mod tests {
 
     #[test]
     fn test_node() {
-        let actual_node = Node::new();
+        let actual_node = Node::new(0);
 
-        let expected_node = Node {
-            val: 0,
-            parent: RefCell::new(Weak::new()),
-            child: RefCell::new(vec![]),
-        };
+        let expected_node = Node::new(0);
 
         assert_eq!(actual_node.val, expected_node.val);
     }

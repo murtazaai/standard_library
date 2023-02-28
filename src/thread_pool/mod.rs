@@ -4,6 +4,7 @@ use threadpool::ThreadPool;
 
 const THREADS: i32 = 10;
 
+#[allow(warnings)]
 pub fn send_message_on_channel(sender: Sender<i32>) {
     for i in 0..THREADS {
         let sender_clone = sender.clone();
@@ -15,6 +16,7 @@ pub fn send_message_on_channel(sender: Sender<i32>) {
 
 }
 
+#[allow(warnings)]
 pub fn receive_message_on_channel(receiver: Receiver<i32>) -> Vec<i32>{
 
     let mut receiver_ds: Vec<i32> = vec![];
@@ -26,6 +28,7 @@ pub fn receive_message_on_channel(receiver: Receiver<i32>) -> Vec<i32>{
     receiver_ds
 }
 
+#[allow(warnings)]
 pub fn mutex_thread_handle_join() -> Arc<Mutex<i32>> {
     
     let arc = Arc::new(Mutex::new(0));
@@ -46,6 +49,7 @@ pub fn mutex_thread_handle_join() -> Arc<Mutex<i32>> {
     arc
 }
 
+#[allow(warnings)]
 pub fn thread_pool() {
     let thread_pool = ThreadPool::new(8);
 
