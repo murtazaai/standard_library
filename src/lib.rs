@@ -1,28 +1,19 @@
+mod launch;
+mod alien;
+mod bug;
+mod fact;
+mod geo;
+mod listener;
+mod origin;
+mod process;
 mod puzzle;
 mod std;
-mod process;
-mod listener;
-mod fact;
-mod thread_pool;
 mod store;
-mod config;
-mod publication;
-mod bug;
-mod geo;
-mod origin;
-mod alien;
-    
+mod thread_pool;
+
 #[cfg(test)]
 mod tests {
-    use std::{collections::HashMap, cell::RefCell, sync::{mpsc::{self, Sender, Receiver}, Mutex}};
-
-    use crate::{origin::life::tree::{Body, Human, Kind}, bug::{parse_string_to_i32, borrow_lifetime, function, Type, deref, Node, List}, config::read_config, std::Character, thread_pool::{send_message_on_channel, receive_message_on_channel, mutex_thread_handle_join}, listener::tcp_listener};
     
-    use std::rc::Rc;
-
-    use crate::thread_pool::thread_pool;
-
-
     #[test]
     fn test_as_byte_array_from_string() {
         let value_string = String::from("value");
@@ -34,10 +25,13 @@ mod tests {
 
     #[test]
     fn test_string_slice() {
-        let string = String::from("This is a string!");
-        let string_1 = string[0..string.len()].to_string();
-        assert_eq!(string_1, "This is a string!")
+        use std::string::String;
 
+        let string = String::from("This is a string!");
+        
+        let string_1 = string[0..string.len()].to_string();
+        
+        assert_eq!(string_1, "This is a string!")
     }
 
     #[test]
@@ -48,16 +42,17 @@ mod tests {
 
     #[test]
     fn test_human() {
+        use std::collections::HashMap;
+
+        use crate::origin::life::tree::{Body, Human, Kind};
+
         let body = Body {
             vertibral_column: true,
             arms: 2,
             legs: 2,
         };
 
-        let human = Human {
-            head: true,
-            body,
-        };
+        let human = Human { head: true, body };
 
         assert_eq!(human.is_humane(-1), false);
 
@@ -72,7 +67,6 @@ mod tests {
         let panic = Some(8u8);
 
         assert_eq!(panic.unwrap(), 8);
-
     }
 
     #[test]
@@ -85,16 +79,20 @@ mod tests {
 
     #[test]
     fn testparse_string_to_i32() {
+        use crate::bug::parse_string_to_i32;
+
         assert_eq!(parse_string_to_i32(String::from("8")), 8);
     }
 
     #[test]
     fn test_power() {
-        assert_eq!(2i32.pow(2u32), 4i32);       
+        assert_eq!(2i32.pow(2u32), 4i32);
     }
 
     #[test]
     fn test_borrow_lifetime() {
+        use crate::bug::{borrow_lifetime, function, Type};
+
         borrow_lifetime();
 
         let in_1 = Type {};
@@ -107,23 +105,15 @@ mod tests {
 
     #[test]
     fn test_ascii() {
-
-
         let x = "a".as_bytes();
-        assert_eq!(x[0], 97);
-    }
 
-    #[test]
-    fn test_config() {
-        // let config = 
-        // let args = 
-        read_config();
-        // assert_eq!(args[0], "/home/murtaza/Workspace/source/rust/rust/rust-lib/target/debug/deps/rust_lib-0826646801856ef5".to_string())
+        assert_eq!(x[0], 97);
     }
 
     #[test]
     fn test_smart_pointer() {
         let y = Box::new(&5);
+
         let z = *y;
 
         assert_eq!(*z, 5);
@@ -131,27 +121,38 @@ mod tests {
 
     #[test]
     fn test_deref() {
+        use crate::bug::deref;
+
         assert_eq!(deref(), 8);
     }
 
     #[test]
     fn test_ref_counter() {
+        use std::rc::Rc;
+
+        use crate::bug::List;
 
         let list_1 = Rc::new(List::Cons(8, Rc::new(List::Nil)));
-        
+
         assert_eq!(Rc::strong_count(&list_1), 1);
+
         assert_eq!(Rc::weak_count(&list_1), 0);
 
         assert_eq!(Rc::strong_count(&list_1), 1);
-        assert_eq!(Rc::weak_count(&list_1), 0);
 
+        assert_eq!(Rc::weak_count(&list_1), 0);
     }
 
     #[test]
     fn test_ref_cell() {
+        use std::cell::RefCell;
+
         let ref_cell = RefCell::new(vec!["Hello!".to_string()]);
+
         ref_cell.borrow_mut().push(String::from("Hello 1"));
+
         let string = &ref_cell.borrow()[1];
+
         assert_eq!(*string, String::from("Hello 1"));
 
         // let ref_cell_1 = new_list_ds(8);
@@ -159,6 +160,8 @@ mod tests {
 
     #[test]
     fn test_node() {
+        use crate::bug::Node;
+
         let actual_node = Node::new(0);
 
         let expected_node = Node::new(0);
@@ -168,6 +171,10 @@ mod tests {
 
     #[test]
     fn test_thread_join() {
+        use std::sync::mpsc::{self, Receiver, Sender};
+
+        use crate::thread_pool::{receive_message_on_channel, send_message_on_channel};
+
         let (sender, receiver): (Sender<i32>, Receiver<i32>) = mpsc::channel();
 
         send_message_on_channel(sender);
@@ -176,14 +183,16 @@ mod tests {
 
         let expected = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-        for i in 0..actual.len()-1 {
+        for i in 0..actual.len() - 1 {
             let actual = actual[i];
             assert!(expected.contains(&actual));
-        } 
-    }   
+        }
+    }
 
     #[test]
     fn test_mutex() {
+        use std::sync::Mutex;
+
         let mutex = Mutex::new(1);
 
         let mut locked_mutex = mutex.lock().unwrap();
@@ -191,55 +200,68 @@ mod tests {
         *locked_mutex = 2;
 
         assert_eq!(*locked_mutex, 2);
-
     }
 
     #[test]
-    fn test_mutex_thread_handle_join() {
-
-        let arc = mutex_thread_handle_join();
-
-        let expected = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-        let actual = *arc.lock().unwrap();
-
-        assert!(expected.contains(&actual));
-
-    }    
-
-    #[test]
     fn test_character() {
+        use crate::std::Character;
+
         let character = Character('a');
+
         assert_eq!(character.0, 'a');
     }
 
     #[test]
     fn test_filter() {
-
         let vec = vec![0, 2, 4, 6, 8];
 
-        let vec_i32: Vec<i32> = vec.iter().map(|f| {
-            f / 2
-        }).collect();
+        let vec_i32: Vec<i32> = vec.iter().map(|f| f / 2).collect();
 
         for i in 0..4 {
             assert_eq!(vec_i32[i], i as i32);
         }
     }
 
+    /// Probe into byte and u8 array
+    /// String = Vec<u8>, str = &[u8]
+    /// Probe into size of u8 
     #[test]
-    fn test_thread_pool() {
-        thread_pool();
+    fn test_binary_octal_decimal_hex() {
+        assert_eq!(
+            format!("{:b}", 0b11111111),
+            String::from("11111111")
+        );
+
+        assert_eq!(
+            format!("{:o}", 0o77777777),
+            String::from("77777777")
+        );
+
+        assert_eq!(
+            format!("{:x}", 0xfffffff),
+            String::from("fffffff")
+        );
+
+        assert_eq!(
+            format!("{:X}", 0xFFFFFFF),
+            String::from("FFFFFFF")
+        );
     }
 
     #[test]
-    fn test_tcp_listener() {
-        tcp_listener();
+    fn test_planet() {
+        use crate::geo::graph::while_hole::milky_way::galaxy::solar_system::{Planet, Coordinate};
 
+        let x = 88888888;
         
+        let y = 88888888;
+        
+        let coordinate = Coordinate::new(x, y);
+        
+        let earth = Planet::new(coordinate);
 
-        assert!(!false);
+        let string = format!("{:?}", earth);
+
+        assert_eq!(string, String::from("Planet { coordinate: Coordinate { longitude: 88888888, latitude: 88888888 } }"));
     }
-
-
 }
