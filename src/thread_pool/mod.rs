@@ -1,6 +1,4 @@
-use std::{sync::{mpsc::{Sender, Receiver}, Arc, Mutex}, thread, net::TcpListener};
-
-use threadpool::ThreadPool;
+use std::{sync::{mpsc::{Sender, Receiver}/* /* */, Arc, Mutex*/}, thread};
 
 const THREADS: i32 = 10;
 
@@ -26,43 +24,4 @@ pub fn receive_message_on_channel(receiver: Receiver<i32>) -> Vec<i32>{
     }
 
     receiver_ds
-}
-
-#[allow(warnings)]
-pub fn mutex_thread_handle_join() -> Arc<Mutex<i32>> {
-    
-    let arc = Arc::new(Mutex::new(0));
-
-    for _ in 0..10 {
-
-        let arc_clone = arc.clone();
-
-        let join_handle = thread::spawn(move || {
-
-            let mut number = arc_clone.lock().unwrap();                
-
-            *number += 1;
-
-        });
-    }
-
-    arc
-}
-
-#[allow(warnings)]
-pub fn thread_pool() {
-    let thread_pool = ThreadPool::new(8);
-
-    // let tcp_listener = 
-    
-    TcpListener::bind("localhost:9999".to_string()).unwrap();
-
-    // for stream in tcp_listener.incoming() {
-        
-    //     let mut buf = "".to_string();
-
-            // thread_pool.execute(|| {
-            //     //     // stream.unwrap().read_to_string(&mut buf);
-            // });
-    // }
 }
