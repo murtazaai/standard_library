@@ -1,5 +1,4 @@
 mod launch;
-mod alien;
 mod bug;
 mod fact;
 mod geo;
@@ -10,10 +9,12 @@ mod puzzle;
 mod std;
 mod store;
 mod thread_pool;
+mod ipfs;
 
 #[cfg(test)]
 mod tests {
-    
+    use crate::ipfs::lost_plus_found;
+
     #[test]
     fn test_as_byte_array_from_string() {
         let value_string = String::from("value");
@@ -47,7 +48,7 @@ mod tests {
         use crate::origin::life::tree::{Body, Human, Kind};
 
         let body = Body {
-            vertibral_column: true,
+            vertebral_column: true,
             arms: 2,
             legs: 2,
         };
@@ -263,5 +264,12 @@ mod tests {
         let string = format!("{:?}", earth);
 
         assert_eq!(string, String::from("Planet { coordinate: Coordinate { longitude: 88888888, latitude: 88888888 } }"));
+    }
+
+    #[test]
+    fn test_lost_plus_found() {
+        let file = lost_plus_found(String::from("./ipfs/mod.rs"));
+
+        // assert!(file.unwrap().exists());
     }
 }
