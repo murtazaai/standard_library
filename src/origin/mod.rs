@@ -1,20 +1,21 @@
 pub mod life {
     pub mod tree {
-        /// pub fn sum_it(base: u8, exp: u32) -> u8 {
-        ///     if 1 < base && 1 < exp && (base.pow(exp) < u8::MAX) {
-        ///         base.pow(exp) - 1
-        ///     } else {
-        ///         1
-        ///     }
-        /// }
+        #[allow(dead_code)]
+        pub fn sum_it(base: u8, exp: u32) -> u8 {
+            if 1 < base && 1 < exp && (base.pow(exp) < u8::MAX) {
+                base.pow(exp) - 1
+            } else {
+                1
+            }
+        }
         
         pub trait Kind {
             fn is_humane(&self, psychometric_trait_attribute: i8) -> bool;
-            // fn chopp_header(/*Fn: f*/order: bool) -> bool;
+            fn chop_header(order: bool) -> bool;
         }
         
         pub struct Body {
-            pub vertibral_column: bool,
+            pub vertebral_column: bool,
             pub arms: u8,
             pub legs: u8,
         }
@@ -33,12 +34,13 @@ pub mod life {
                 }
             }
 
-            // fn chopp_header(why: bool) -> bool {
-            //     // let ohoo = f;
-            //     match why {
-            //         _ => true
-            //     }
-            // }
+            #[allow(dead_code, unused_doc_comments)]
+            fn chop_header(why: bool) -> bool {
+                match why {
+                    /// In every scenario: treemap all use cases: 1 result
+                    _ => true
+                }
+            }
         }
         
     }

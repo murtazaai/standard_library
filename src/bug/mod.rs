@@ -88,27 +88,31 @@ pub enum List {
     Nil,
 }
 
-// pub enum ListDS {
-//     Val(i32, RefCell<Rc<ListDS>>),
-//     Nil,
-// }
+#[allow(dead_code)]
+pub enum ListDS {
+    Val(i32, RefCell<Rc<ListDS>>),
+    Nil,
+}
 
-// impl ListDS {
-//     fn new(val :i32) -> ListDS {
-//         Self::Val(val, RefCell::new(Rc::new(Self::Nil)))
-//     }
+#[allow(dead_code)]
+impl ListDS {
+    fn new(val :i32) -> ListDS {
+        Self::Val(val, RefCell::new(Rc::new(Self::Nil)))
+    }
 
-//     fn iterate(&self) -> Option<&RefCell<Rc<ListDS>>> {
-//         match self {
-//             Self::Val(val, rc) => Some(rc),
-//             Self::Nil => None,
-//         }
-//     }
-// }
+    #[allow(unused_variables)]
+    fn iterate(&self) -> Option<&RefCell<Rc<ListDS>>> {
+        match self {
+            Self::Val(val, rc) => Some(rc),
+            Self::Nil => None,
+        }
+    }
+}
 
-// pub fn new_list_ds(val: i32) -> ListDS {
-//     ListDS::new(val)
-// }
+#[allow(dead_code)]
+pub fn new_list_ds(val: i32) -> ListDS {
+    ListDS::new(val)
+}
 
 #[allow(dead_code)]
 pub struct Node {
