@@ -3,7 +3,7 @@
 [package] #Defines a package.
 name = "stdlib" #The name of the package.
 version = "0.1.0" #The version of the package.
-authors = ["Murtaza Ali Imtiaz <murtazaai@gmail.com>"] #The authors of the package.
+authors = ["Murtaza Ali Imtiaz <murtazalimtiaz@gmail.com>"] #The authors of the package.
 edition = "2021" #The Rust edition.
 rust-version = "1.56.0" #The minimal supported Rust version.
 description = "Just a playground." #A description of the package.
