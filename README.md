@@ -26,6 +26,6 @@ test output
 
 ## License
 
-`test` is primarily distributed under the terms of both the PBS. license.
+`test` is primarily distributed under the terms of both the MURTAZAI. license.
 
 See LICENSE-MURTAZAI for details.
