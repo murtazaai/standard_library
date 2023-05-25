@@ -4,7 +4,6 @@
 
 ## Install
 ```
-# BACKLOG!
 cargo install std_lib
 ```
 
@@ -20,7 +19,7 @@ fn test() {
 prints
 
 ```
-# To BE!
+    HHHHHHHH
 ```
 
 ## License
