@@ -1,17 +1,16 @@
-# stdlib
+# std_lib
 
 > Just a playground.
 
 ## Install
-
-```toml
-[dependencies]
-stdlib = "0.1.0"
+```
+# BACKLOG!
+cargo install std_lib
 ```
 
 ## Example
 ```rust
-extern crate stdlib;
+extern crate std_lib;
 
 fn test() {
     // Implementation goes here.
@@ -21,11 +20,9 @@ fn test() {
 prints
 
 ```
-test output
+# To BE!
 ```
 
 ## License
 
-`test` is primarily distributed under the terms of both the MURTAZAI. license.
-
-See LICENSE-MURTAZAI for details.
+`test` is primarily distributed under the terms of both the [LICENSE-MURTAZAI](https://github.com/murtazaai/std_lib/blob/main/LICENSE-MURTAZAI) license.

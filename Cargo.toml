@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MURTAZAI
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [package] #Defines a package.
-name = "stdlib" #The name of the package.
+name = "std_lib" #The name of the package.
 version = "0.1.0" #The version of the package.
 authors = ["Murtaza Ali Imtiaz <murtazalimtiaz@gmail.com>"] #The authors of the package.
 edition = "2021" #The Rust edition.
@@ -9,9 +9,9 @@ rust-version = "1.56.0" #The minimal supported Rust version.
 description = "Just a playground." #A description of the package.
 documentation = "" #URL of the package documentation.
 readme = "README.md" #Path to the package's README file.
-homepage = "https://github.com/murtazaai/stdlib" #URL of the package homepage.
-repository = "https://github.com/murtazaai/stdlib" #URL of the package source repository.
-keywords = ["stdlib", "playground"] #Keywords for the package.
+homepage = "https://github.com/murtazaai/std_lib" #URL of the package homepage.
+repository = "https://github.com/murtazaai/std_lib" #URL of the package source repository.
+keywords = ["std_lib", "playground"] #Keywords for the package.
 categories = [] #Categories of the package.
 #build = "build/build.rs" #Path to the package build script.
 exclude = [] #Files to exclude when publishing.
@@ -102,7 +102,7 @@ members = [
 #rand.workspace = true
 
 [lib] #Library target settings.
-name = "stdlib"           # The name of the target.
+name = "std_lib"           # The name of the target.
 path = "src/lib.rs"    # The source file of the target.
 test = true            # Is tested by default.
 doctest = true         # Documentation examples are tested by default.
@@ -116,16 +116,16 @@ crate-type = ["lib"]   # The crate types to generate.
 required-features = [] # Features required to build this target (N/A for lib).
 
 #[[bin]] #Binary target settings.
-#name = "stdlib"
+#name = "std_lib"
 #test = false
 #bench = false
 #
 #[[bin]]
-#name = "stdlib"
+#name = "std_lib"
 #required-features = ["postgres", "sqlite", "tools"]
 
 [[example]]
-name = "stdlib"
+name = "std_lib"
 crate-type = ["staticlib"]
 path = "examples/example.rs"
 
@@ -166,11 +166,11 @@ strip = "debuginfo"
 ##test.test = true
 
 #[[bench]] #Benchmark target settings.
-#bench.name = "stdlib"
+#bench.name = "std_lib"
 #bench.bench = true
 
 #[project]
-#name = "stdlib"
+#name = "std_lib"
 #version = "0.1.0"
 
 [dependencies] #Package library dependencies.
@@ -238,15 +238,15 @@ ico = ["bmp", "png"]
 maintenance = { status = "..." }
 
 #[patch.crates-io]
-#stdlib = { git = 'https://github.com/murtazaai/stdlib' }
-#stdlib = { path = 'stdlib' }
+#std_lib = { git = 'https://github.com/murtazaai/std_lib' }
+#std_lib = { path = 'std_lib' }
 
-#[dependencies.stdlib]
-#git = 'https://github.com/murtazaai/stdlib'
+#[dependencies.std_lib]
+#git = 'https://github.com/murtazaai/std_lib'
 
-#[patch.'https://github.com/murtazaai/stdlib']
-#stdlib = { git = 'https://github.com/murtazaai/stdlib', branch = 'main' }
+#[patch.'https://github.com/murtazaai/std_lib']
+#std_lib = { git = 'https://github.com/murtazaai/std_lib', branch = 'main' }
 
 #[replace]
-#"stdlib:0.1.0" = { git = 'https://github.com/murtazaai/stdlib' }
-#"stdlib:0.1.0" = { path = 'stdlib' }
+#"std_lib:0.1.0" = { git = 'https://github.com/murtazaai/std_lib' }
+#"std_lib:0.1.0" = { path = 'std_lib' }
