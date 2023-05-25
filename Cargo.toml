@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MurtazaI
+# SPDX-License-Identifier: MURTAZAI
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [package] #Defines a package.
 name = "stdlib" #The name of the package.
