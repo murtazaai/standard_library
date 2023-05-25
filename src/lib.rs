@@ -1,26 +1,15 @@
-/// Backlog!
-/// * Doc comments and rustdoc generation
-/// * Unit test code coverage (Unit test coverage) for the library i.e. --lib, unit tests and *.rlib files
-/// * Mutation test coverage
-/// * Pen tests
-/// * White-hat tests
-/// * Integration test (Services-integration test)
-/// * Behavior test (BDD)
-/// * Acceptance test driven development (ATDD)
-/// * Customer satisfaction surveys (9* needed) 6Ws + 1H
-
-mod launch;
 mod bug;
 mod fact;
 mod geo;
+mod ipfs;
+mod launch;
 mod listener;
 mod origin;
 mod process;
 mod puzzle;
+mod std;
 mod store;
 mod thread_pool;
-mod ipfs;
-mod std;
 
 #[cfg(test)]
 mod tests {
@@ -39,9 +28,9 @@ mod tests {
         use std::string::String;
 
         let string = String::from("This is a string!");
-        
+
         let string_1 = string[0..string.len()].to_string();
-        
+
         assert_eq!(string_1, "This is a string!")
     }
 
@@ -235,45 +224,38 @@ mod tests {
 
     /// Probe into byte and u8 array
     /// String = Vec<u8>, str = &[u8]
-    /// Probe into size of u8 
+    /// Probe into size of u8
     #[test]
     fn test_binary_octal_decimal_hex() {
-        assert_eq!(
-            format!("{:b}", 0b11111111),
-            String::from("11111111")
-        );
+        assert_eq!(format!("{:b}", 0b11111111), String::from("11111111"));
 
-        assert_eq!(
-            format!("{:o}", 0o77777777),
-            String::from("77777777")
-        );
+        assert_eq!(format!("{:o}", 0o77777777), String::from("77777777"));
 
-        assert_eq!(
-            format!("{:x}", 0xfffffff),
-            String::from("fffffff")
-        );
+        assert_eq!(format!("{:x}", 0xfffffff), String::from("fffffff"));
 
-        assert_eq!(
-            format!("{:X}", 0xFFFFFFF),
-            String::from("FFFFFFF")
-        );
+        assert_eq!(format!("{:X}", 0xFFFFFFF), String::from("FFFFFFF"));
     }
 
     #[test]
     fn test_planet() {
-        use crate::geo::graph::while_hole::milky_way::galaxy::solar_system::{Planet, Coordinate};
+        use crate::geo::graph::while_hole::milky_way::galaxy::solar_system::{Coordinate, Planet};
 
         let x = 88888888;
-        
+
         let y = 88888888;
-        
+
         let coordinate = Coordinate::new(x, y);
-        
+
         let earth = Planet::new(coordinate);
 
         let string = format!("{:?}", earth);
 
-        assert_eq!(string, String::from("Planet { coordinate: Coordinate { longitude: 88888888, latitude: 88888888 } }"));
+        assert_eq!(
+            string,
+            String::from(
+                "Planet { coordinate: Coordinate { longitude: 88888888, latitude: 88888888 } }"
+            )
+        );
     }
 
     #[test]
@@ -284,7 +266,6 @@ mod tests {
         let current_path = String::from("./src/methodology.rs");
 
         /// let invalid_path = String::from("./abc/abc.rs");
-
         let current_result = read_file_content(current_path);
 
         let expected_content = String::from("trait Iterate {}\n\ntype stepX = Iterate;\n\nstruct Process {\n    a: stepX,\n}\n\ntrait Method {\n    fn plan() {}\n\n    fn execute() {}\n\n    fn monitor() {}\n\n    fn control() {}\n\n}");
