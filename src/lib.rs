@@ -6,22 +6,23 @@ mod listener;
 mod origin;
 mod process;
 mod puzzle;
-mod std;
 mod store;
 mod thread_pool;
 mod ipfs;
+mod std;
 
 #[cfg(test)]
 mod tests {
-    use crate::ipfs::lost_plus_found;
+
+    use crate::ipfs::read_file_content;
 
     #[test]
     fn test_as_byte_array_from_string() {
         let value_string = String::from("value");
         let actual_byte_array = value_string.as_bytes();
-        let expected_byte_array = actual_byte_array.clone();
-        assert_eq!(actual_byte_array, expected_byte_array);
-        assert_eq!(value_string.as_bytes(), expected_byte_array);
+        let current_byte_array = actual_byte_array.clone();
+        assert_eq!(actual_byte_array, current_byte_array);
+        assert_eq!(value_string.as_bytes(), current_byte_array);
     }
 
     #[test]
@@ -165,9 +166,9 @@ mod tests {
 
         let actual_node = Node::new(0);
 
-        let expected_node = Node::new(0);
+        let current_node = Node::new(0);
 
-        assert_eq!(actual_node.val, expected_node.val);
+        assert_eq!(actual_node.val, current_node.val);
     }
 
     #[test]
@@ -182,11 +183,11 @@ mod tests {
 
         let actual = receive_message_on_channel(receiver);
 
-        let expected = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let current = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
         for i in 0..actual.len() - 1 {
             let actual = actual[i];
-            assert!(expected.contains(&actual));
+            assert!(current.contains(&actual));
         }
     }
 
@@ -268,8 +269,15 @@ mod tests {
 
     #[test]
     fn test_lost_plus_found() {
-        let file = lost_plus_found(String::from("./ipfs/mod.rs"));
+        let current_path = String::from("./src/methodology.rs");
 
-        // assert!(file.unwrap().exists());
+        let current_result = read_file_content(current_path);
+
+        let expected_content = String::from("trait Iterate {}\n\ntype stepX = Iterate;\n\nstruct Process {\n    a: stepX,\n}\n\ntrait Method {\n    fn plan() {}\n\n    fn execute() {}\n\n    fn monitor() {}\n\n    fn control() {}\n\n}");
+
+        match current_result {
+            Ok(current_content) => assert_eq!(current_content, expected_content),
+            Err(e) => assert_eq!(e.to_string(), String::from("")),
+        };
     }
 }
