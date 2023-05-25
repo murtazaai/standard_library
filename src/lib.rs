@@ -1,3 +1,14 @@
+/// Backlog!
+/// * Doc comments and rustdoc generation
+/// * Unit test code coverage (Unit test coverage) for the library i.e. --lib, unit tests and *.rlib files
+/// * Mutation test coverage
+/// * Pen tests
+/// * White-hat tests
+/// * Integration test (Services-integration test)
+/// * Behavior test (BDD)
+/// * Acceptance test driven development (ATDD)
+/// * Customer satisfaction surveys (9* needed) 6Ws + 1H
+
 mod launch;
 mod bug;
 mod fact;
@@ -13,8 +24,6 @@ mod std;
 
 #[cfg(test)]
 mod tests {
-
-    use crate::ipfs::read_file_content;
 
     #[test]
     fn test_as_byte_array_from_string() {
@@ -268,8 +277,13 @@ mod tests {
     }
 
     #[test]
+    #[allow(unused_doc_comments)]
     fn test_lost_plus_found() {
+        use crate::ipfs::read_file_content;
+
         let current_path = String::from("./src/methodology.rs");
+
+        /// let invalid_path = String::from("./abc/abc.rs");
 
         let current_result = read_file_content(current_path);
 
@@ -277,7 +291,7 @@ mod tests {
 
         match current_result {
             Ok(current_content) => assert_eq!(current_content, expected_content),
-            Err(e) => assert_eq!(e.to_string(), String::from("")),
+            Err(e) => assert_eq!(e.to_string(), String::from("")), // panic with the error code and error message
         };
     }
 }
