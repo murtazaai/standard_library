@@ -56,8 +56,10 @@ autobenches = false #Disables bench auto discovery.
 #browser = "chrome"          # browser to use with `cargo doc --open`,
 # overrides the `BROWSER` environment variable
 
-#[workspace] #Path to the workspace for the package.
-#members = []
+[workspace] #Path to the workspace for the package.
+members = [
+    "macro"
+]
 #default-members = ["path/to/member2", "path/to/member3/abc"]
 #exclude = ["crates/abc", "path/to/other"]
 
