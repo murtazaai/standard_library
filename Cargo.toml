@@ -247,4 +247,4 @@ maintenance = { status = "..." }
 
 #[replace]
 #"stdlib:0.1.0" = { git = 'https://github.com/murtazaai/stdlib' }
-#"stdlib:0.1.0" = { path = 'universem' }
+#"stdlib:0.1.0" = { path = 'stdlib' }
