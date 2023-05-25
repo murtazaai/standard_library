@@ -80,7 +80,7 @@ mod tests {
     }
 
     #[test]
-    fn testparse_string_to_i32() {
+    fn test_parse_string_to_i32() {
         use crate::bug::parse_string_to_i32;
 
         assert_eq!(parse_string_to_i32(String::from("8")), 8);
