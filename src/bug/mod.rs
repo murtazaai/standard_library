@@ -78,8 +78,8 @@ impl<T> Drop for BlueBox<T> {
 
 #[allow(warnings)]
 pub fn deref() -> u8 {
-    let bluebox = BlueBox::new(8u8);
-    *bluebox.deref()
+    let blue_box = BlueBox::new(8u8);
+    *blue_box.deref()
 }
 
 #[allow(warnings)]
