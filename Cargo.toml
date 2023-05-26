@@ -179,6 +179,8 @@ log = "0.4.17"
 merkletree = "0.23.0"
 substring = "1.4.5"
 threadpool = "1.8.1"
+http = "0.2.9"
+assert-type-eq = "0.1.0"
 
 # standard crate data is left out
 [dev-dependencies] #Dependencies for examples, tests, and benchmarks.

@@ -7,12 +7,15 @@ mod listener;
 mod origin;
 mod process;
 mod puzzle;
+mod seed;
 mod std;
 mod store;
 mod thread_pool;
 
 #[cfg(test)]
 mod tests {
+    use assert_type_eq::assert_type_eq;
+    use http::Request;
 
     #[test]
     fn test_as_byte_array_from_string() {
@@ -274,5 +277,10 @@ mod tests {
             Ok(current_content) => assert_eq!(current_content, expected_content),
             Err(e) => assert_eq!(e.to_string(), String::from("")), // panic with the error code and error message
         };
+    }
+
+    #[test]
+    fn test_generate_request_header() {
+        assert_type_eq!(Request<()>, Request<()>);
     }
 }
