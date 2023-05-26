@@ -16,6 +16,7 @@ mod thread_pool;
 /// Verify and validate.
 #[cfg(test)]
 mod tests {
+    use crate::ipfs::btree_set_overload;
     use assert_type_eq::assert_type_eq;
     use http::Request;
 
@@ -323,5 +324,16 @@ mod tests {
         // let dimension = isize::MAX;
         // let sphere: Sphere = Sphere(dimension)
         // assert_type_eq!(Sphere, Sphere);
+    }
+
+    /// Data structures: [`BTreeSet`]
+    #[test]
+    // #[should_panic(expected = "assertion failed")]
+    fn test_btree_set_overload() {
+        let btree_set = btree_set_overload();
+
+        let a = btree_set.get(&isize::MIN).unwrap();
+
+        assert_eq!(a, &isize::MIN);
     }
 }

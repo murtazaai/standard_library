@@ -1,5 +1,20 @@
-use std::io::{Error, Read};
+use std::collections::BTreeSet;
 use std::fs::File;
+use std::io::{Error, Read};
+
+/// Data structures
+/// [`BTreeSet`]
+#[allow(unconditional_recursion, dead_code, unused_doc_comments)]
+pub fn btree_set_overload() -> BTreeSet<isize> {
+    let mut btree_set = BTreeSet::new();
+
+    btree_set.insert(isize::MIN);
+
+    btree_set
+
+    // btree_set_overload();
+    // panic!("assertion failed");
+}
 
 #[allow(unused_doc_comments, dead_code)]
 pub fn read_file_content(path: String) -> Result<String, Error> {
