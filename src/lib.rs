@@ -316,4 +316,12 @@ mod tests {
         // Solar to Lunar
         // convert_from_solar_to_lunar(a, 'يقطع الرأس');
     }
+
+    /// Test the shape of a [`Sphere`]
+    #[test]
+    fn test_sphere() {
+        // let dimension = isize::MAX;
+        // let sphere: Sphere = Sphere(dimension)
+        // assert_type_eq!(Sphere, Sphere);
+    }
 }

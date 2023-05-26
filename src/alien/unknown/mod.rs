@@ -2,7 +2,7 @@
 #[allow(dead_code)]
 pub mod vacuum_graphic {
     const METER: i32 = 1;
-    const DEFAULT_DENSITY: i32 = 7680*4320;
+    const DEFAULT_DENSITY: i32 = 7680 * 4320;
 
     enum Color {
         Rgb(i32, i32, i32),
@@ -11,16 +11,28 @@ pub mod vacuum_graphic {
 
     enum Pixel {
         Length(i32),
-        Color
+        Color,
     }
+
+    enum Multiverse {}
+
+    pub enum Shape {
+        Coordinate(n),
+    }
+
+    pub enum Cube {}
+
+    pub enum Sphere {}
+
+    /// trait t = Generic(T);
+    /// struct s = Generic(S);
+    /// type tp = s impl t;
 
     #[allow(dead_code, unused_doc_comments)]
     /// to be!
     trait Density {
         #[allow(unused_variables)]
-        fn pixel_per_meter(pixel: i32) {
-
-        }
+        fn pixel_per_meter(pixel: i32) {}
     }
 
     enum Display {
