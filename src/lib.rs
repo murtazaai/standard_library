@@ -12,11 +12,14 @@ mod std;
 mod store;
 mod thread_pool;
 
+/// Unit test cases [`tests`]
+/// Verify and validate.
 #[cfg(test)]
 mod tests {
     use assert_type_eq::assert_type_eq;
     use http::Request;
 
+    /// [`String`] is a [`Vec`] array of [`byte`].
     #[test]
     fn test_as_byte_array_from_string() {
         let value_string = String::from("value");
@@ -26,6 +29,7 @@ mod tests {
         assert_eq!(value_string.as_bytes(), current_byte_array);
     }
 
+    /// Slice a [`String`]
     #[test]
     fn test_string_slice() {
         use std::string::String;
@@ -37,12 +41,14 @@ mod tests {
         assert_eq!(string_1, "This is a string!")
     }
 
+    /// [`str`] is a [`u8`] array.
     #[test]
     fn test_str() {
         let str_1 = "ABCDEF";
         assert_eq!(str_1, "ABCDEF")
     }
 
+    /// [`Hashmap`] test.
     #[test]
     fn test_human() {
         use std::collections::HashMap;
@@ -72,6 +78,8 @@ mod tests {
         assert_eq!(panic.unwrap(), 8);
     }
 
+    /// Chinese language.
+    /// [UTF-8] not [Unicode]
     #[test]
     fn test_unicode_transformation_format_8() {
         let 你好 = String::from("你好");
@@ -80,6 +88,7 @@ mod tests {
         // assert_eq!(交換[0], 0x4EA4);
     }
 
+    /// Parse
     #[test]
     fn test_parse_string_to_i32() {
         use crate::bug::parse_string_to_i32;
@@ -87,11 +96,14 @@ mod tests {
         assert_eq!(parse_string_to_i32(String::from("8")), 8);
     }
 
+    /// Exponent
+    /// For logarithm implementation.
     #[test]
     fn test_power() {
         assert_eq!(2i32.pow(2u32), 4i32);
     }
 
+    /// Borrow.
     #[test]
     fn test_borrow_lifetime() {
         use crate::bug::{borrow_lifetime, function, Type};
@@ -106,6 +118,7 @@ mod tests {
         // assert_eq!(return_1, &in_1.clone());
     }
 
+    /// [&str] character [ASCII] confirmation.
     #[test]
     fn test_ascii() {
         let x = "a".as_bytes();
@@ -113,6 +126,7 @@ mod tests {
         assert_eq!(x[0], 97);
     }
 
+    /// Stack and heap.
     #[test]
     fn test_smart_pointer() {
         let y = Box::new(&5);
@@ -122,6 +136,7 @@ mod tests {
         assert_eq!(*z, 5);
     }
 
+    /// Dereference.
     #[test]
     fn test_deref() {
         use crate::bug::deref;
@@ -129,6 +144,8 @@ mod tests {
         assert_eq!(deref(), 8);
     }
 
+    /// Eager and late binding.
+    /// Weak reference count.
     #[test]
     fn test_ref_counter() {
         use std::rc::Rc;
@@ -146,6 +163,7 @@ mod tests {
         assert_eq!(Rc::weak_count(&list_1), 0);
     }
 
+    /// [`RefCell`] verification.
     #[test]
     fn test_ref_cell() {
         use std::cell::RefCell;
@@ -161,6 +179,7 @@ mod tests {
         // let ref_cell_1 = new_list_ds(8);
     }
 
+    /// Container.
     #[test]
     fn test_node() {
         use crate::bug::Node;
@@ -172,6 +191,7 @@ mod tests {
         assert_eq!(actual_node.val, current_node.val);
     }
 
+    /// Message queuing
     #[test]
     fn test_thread_join() {
         use std::sync::mpsc::{self, Receiver, Sender};
@@ -192,6 +212,7 @@ mod tests {
         }
     }
 
+    /// [`MutexGuard`]
     #[test]
     fn test_mutex() {
         use std::sync::Mutex;
@@ -205,6 +226,7 @@ mod tests {
         assert_eq!(*locked_mutex, 2);
     }
 
+    /// Custom [`Character`] type.
     #[test]
     fn test_character() {
         use crate::std::Character;
@@ -214,6 +236,7 @@ mod tests {
         assert_eq!(character.0, 'a');
     }
 
+    /// [`vec_i32`]
     #[test]
     fn test_filter() {
         let vec = vec![0, 2, 4, 6, 8];
@@ -239,6 +262,7 @@ mod tests {
         assert_eq!(format!("{:X}", 0xFFFFFFF), String::from("FFFFFFF"));
     }
 
+    /// Test [`Planet`] root reset.
     #[test]
     fn test_planet() {
         use crate::geo::graph::while_hole::milky_way::galaxy::solar_system::{Coordinate, Planet};
@@ -261,9 +285,10 @@ mod tests {
         );
     }
 
+    /// [`read_file_content`]
     #[test]
     #[allow(unused_doc_comments)]
-    fn test_lost_plus_found() {
+    fn read_file_content() {
         use crate::ipfs::read_file_content;
 
         let current_path = String::from("./src/methodology.rs");
@@ -279,6 +304,7 @@ mod tests {
         };
     }
 
+    /// [`assert_type_eq`]
     #[test]
     fn test_generate_request_header() {
         assert_type_eq!(Request<()>, Request<()>);
