@@ -309,4 +309,11 @@ mod tests {
     fn test_generate_request_header() {
         assert_type_eq!(Request<()>, Request<()>);
     }
+
+    /// [`calendar`]
+    #[test]
+    fn test_calendar() {
+        // Solar to Lunar
+        // convert_from_solar_to_lunar(a, 'يقطع الرأس');
+    }
 }
