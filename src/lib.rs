@@ -7,6 +7,7 @@ mod listener;
 mod origin;
 mod process;
 mod puzzle;
+mod reliability;
 mod seed;
 mod std;
 mod store;
@@ -17,6 +18,7 @@ mod thread_pool;
 #[cfg(test)]
 mod tests {
     use crate::ipfs::btree_set_overload;
+    use crate::reliability::fault_tolerance::tolerate_fault;
     use assert_type_eq::assert_type_eq;
     use http::Request;
 
@@ -335,5 +337,28 @@ mod tests {
         let a = btree_set.get(&isize::MIN).unwrap();
 
         assert_eq!(a, &isize::MIN);
+    }
+
+    /// Fault tolerance
+    /// fault
+    #[test]
+    fn negative_test_case_tolerate_fault() {
+        let result = tolerate_fault("./invalid_dir/methodology.rs".to_string());
+
+        let error = result.unwrap_err();
+
+        assert_eq!(error.kind().to_string(), "entity not found".to_string());
+    }
+
+    /// Fault tolerance
+    /// positive test case
+    #[test]
+    fn test_no_fault() {
+        let content = tolerate_fault("./src/methodology.rs".to_string()).unwrap();
+        // .expect(&*"entity not found: Os { code: 2, kind: NotFound, message: \"No such file or directory\" }: Os { code: 2, kind: NotFound, message: \"No such file or directory\" }".to_string());
+
+        if Some(&content).is_some() {
+            assert_eq!(content, "trait Iterate {}\n\ntype stepX = Iterate;\n\nstruct Process {\n    a: stepX,\n}\n\ntrait Method {\n    fn plan() {}\n\n    fn execute() {}\n\n    fn monitor() {}\n\n    fn control() {}\n\n}".to_string());
+        }
     }
 }

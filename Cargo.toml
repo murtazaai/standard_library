@@ -135,7 +135,7 @@ overflow-checks = false     # Disable integer overflow checks.
 
 [profile.release]
 strip = "debuginfo"
-# panic = 'abort'
+panic = 'abort'
 
 #[profile.dev.build-override]
 #opt-level = 0
