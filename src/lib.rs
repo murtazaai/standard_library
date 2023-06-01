@@ -1,3 +1,6 @@
+#![feature(unboxed_closures)]
+#![feature(tuple_trait)]
+
 mod bug;
 mod fact;
 mod generic;
