@@ -1,4 +1,7 @@
-use std::{sync::{mpsc::{Sender, Receiver}/* /* */, Arc, Mutex*/}, thread};
+use std::{
+    sync::mpsc::{Receiver, Sender},
+    thread,
+};
 
 const THREADS: i32 = 10;
 
@@ -9,14 +12,12 @@ pub fn send_message_on_channel(sender: Sender<i32>) {
 
         let x = thread::spawn(move || {
             let y = sender_clone.send(i).unwrap();
-        });           
+        });
     }
-
 }
 
 #[allow(warnings)]
-pub fn receive_message_on_channel(receiver: Receiver<i32>) -> Vec<i32>{
-
+pub fn receive_message_on_channel(receiver: Receiver<i32>) -> Vec<i32> {
     let mut receiver_ds: Vec<i32> = vec![];
 
     for i in 0..THREADS {

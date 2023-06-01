@@ -1,5 +1,6 @@
 mod bug;
 mod fact;
+mod generic;
 mod geo;
 mod ipfs;
 mod launch;
@@ -17,6 +18,7 @@ mod thread_pool;
 /// Verify and validate.
 #[cfg(test)]
 mod tests {
+    use crate::generic::f0;
     use crate::ipfs::btree_set_overload;
     use crate::reliability::fault_tolerance::tolerate_fault;
     use assert_type_eq::assert_type_eq;
@@ -360,5 +362,15 @@ mod tests {
         if Some(&content).is_some() {
             assert_eq!(content, "trait Iterate {}\n\ntype stepX = Iterate;\n\nstruct Process {\n    a: stepX,\n}\n\ntrait Method {\n    fn plan() {}\n\n    fn execute() {}\n\n    fn monitor() {}\n\n    fn control() {}\n\n}".to_string());
         }
+    }
+
+    /// Test generic [`format!`]
+    #[test]
+    fn test_generic_f0() {
+        let current_format = f0(10, 20);
+
+        let expected_format = String::from("T: 10, U: 20");
+
+        assert_eq!(current_format, expected_format);
     }
 }
