@@ -9,8 +9,8 @@ rust-version = "1.56.0" #The minimal supported Rust version.
 description = "Just a playground." #A description of the package.
 documentation = "" #URL of the package documentation.
 readme = "README.md" #Path to the package's README file.
-homepage = "https://github.com/murtazaai/std_lib" #URL of the package homepage.
-repository = "https://github.com/murtazaai/std_lib" #URL of the package source repository.
+homepage = "https://github.com/murtazaai/std" #URL of the package homepage.
+repository = "https://github.com/murtazaai/std" #URL of the package source repository.
 keywords = ["std_lib", "playground"] #Keywords for the package.
 categories = [] #Categories of the package.
 #build = "build/build.rs" #Path to the package build script.
@@ -241,14 +241,14 @@ ico = ["bmp", "png"]
 maintenance = { status = "..." }
 
 #[patch.crates-io]
-#std_lib = { git = 'https://github.com/murtazaai/std_lib' }
+#std_lib = { git = 'https://github.com/murtazaai/std' }
 #std_lib = { path = 'std_lib' }
 
 #[dependencies.std_lib]
-#git = 'https://github.com/murtazaai/std_lib'
+#git = 'https://github.com/murtazaai/std'
 
-#[patch.'https://github.com/murtazaai/std_lib']
-#std_lib = { git = 'https://github.com/murtazaai/std_lib', branch = 'main' }
+#[patch.'https://github.com/murtazaai/std']
+#std_lib = { git = 'https://github.com/murtazaai/std', branch = 'main' }
 
 #[replace]
 #"std_lib:0.1.0" = { git = 'https://github.com/murtazaai/std_lib' }
