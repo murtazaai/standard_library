@@ -1,27 +1,6 @@
-# std_lib
+# std
 
 > Just a playground.
-
-## Install
-```
-cargo install std_lib
-```
-
-## Example
-```rust
-extern crate std_lib;
-
-fn test() {
-    // Implementation goes here.
-}
-```
-
-prints
-
-```
-    HHHHHHHH
-    World Trade Foundation
-```
 
 ## License
 
