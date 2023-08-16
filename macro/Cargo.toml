@@ -1,7 +1,7 @@
 [package]
 name = "macron"
 version = "0.1.0"
-authors = ["Murtaza Ali Imtiaz <murtazalimtiaz@gmail.com>"]
+authors = ["Murtaza Ali Imtiaz <native@murtazai.org>"]
 description = "A `cargo generate` template for quick-starting a procedural macro crate"
 keywords = ["template", "proc_macro", "procmacro"]
 edition = "2018"
