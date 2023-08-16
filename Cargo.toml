@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MURTAZAI
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [package] #Defines a package.
-name = "std_lib" #The name of the package.
+name = "std" #The name of the package.
 version = "0.1.0" #The version of the package.
-authors = ["Murtaza Ali Imtiaz <murtazalimtiaz@gmail.com>"] #The authors of the package.
+authors = ["Murtaza Ali Imtiaz <native@murtazai.org>"] #The authors of the package.
 edition = "2021" #The Rust edition.
 rust-version = "1.56.0" #The minimal supported Rust version.
 description = "Just a playground." #A description of the package.
@@ -102,7 +102,7 @@ members = [
 #rand.workspace = true
 
 [lib] #Library target settings.
-name = "std_lib"           # The name of the target.
+name = "std"           # The name of the target.
 path = "src/lib.rs"    # The source file of the target.
 test = true            # Is tested by default.
 doctest = true         # Documentation examples are tested by default.
