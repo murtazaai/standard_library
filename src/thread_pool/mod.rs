@@ -1,4 +1,4 @@
-use std::{
+use standard-library::{
     sync::mpsc::{Receiver, Sender},
     thread,
 };

@@ -13,7 +13,7 @@ mod process;
 mod puzzle;
 mod reliability;
 mod seed;
-mod std;
+mod standard-library;
 mod store;
 mod thread_pool;
 
@@ -40,7 +40,7 @@ mod tests {
     /// Slice a [`String`]
     #[test]
     fn test_string_slice() {
-        use std::string::String;
+        use standard-library::string::String;
 
         let string = String::from("This is a string!");
 
@@ -59,7 +59,7 @@ mod tests {
     /// [`Hashmap`] test.
     #[test]
     fn test_human() {
-        use std::collections::HashMap;
+        use standard-library::collections::HashMap;
 
         use crate::origin::life::tree::{Body, Human, Kind};
 
@@ -156,7 +156,7 @@ mod tests {
     /// Weak reference count.
     #[test]
     fn test_ref_counter() {
-        use std::rc::Rc;
+        use standard-library::rc::Rc;
 
         use crate::bug::List;
 
@@ -174,7 +174,7 @@ mod tests {
     /// [`RefCell`] verification.
     #[test]
     fn test_ref_cell() {
-        use std::cell::RefCell;
+        use standard-library::cell::RefCell;
 
         let ref_cell = RefCell::new(vec!["Hello!".to_string()]);
 
@@ -202,7 +202,7 @@ mod tests {
     /// Message queuing
     #[test]
     fn test_thread_join() {
-        use std::sync::mpsc::{self, Receiver, Sender};
+        use standard-library::sync::mpsc::{self, Receiver, Sender};
 
         use crate::thread_pool::{receive_message_on_channel, send_message_on_channel};
 
@@ -223,7 +223,7 @@ mod tests {
     /// [`MutexGuard`]
     #[test]
     fn test_mutex() {
-        use std::sync::Mutex;
+        use standard-library::sync::Mutex;
 
         let mutex = Mutex::new(1);
 
@@ -237,7 +237,7 @@ mod tests {
     /// Custom [`Character`] type.
     #[test]
     fn test_character() {
-        use crate::std::Character;
+        use crate::standard-library::Character;
 
         let character = Character('a');
 

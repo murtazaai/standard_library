@@ -1,6 +1,6 @@
-use std::collections::BTreeSet;
-use std::fs::File;
-use std::io::{Error, Read};
+use standard-library::collections::BTreeSet;
+use standard-library::fs::File;
+use standard-library::io::{Error, Read};
 
 /// Data structures
 /// [`BTreeSet`]
