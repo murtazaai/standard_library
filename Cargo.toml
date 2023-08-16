@@ -11,7 +11,7 @@ documentation = "" #URL of the package documentation.
 readme = "README.md" #Path to the package's README file.
 homepage = "https://github.com/murtazaai/std" #URL of the package homepage.
 repository = "https://github.com/murtazaai/std" #URL of the package source repository.
-keywords = ["std_lib", "playground"] #Keywords for the package.
+keywords = ["std", "playground"] #Keywords for the package.
 categories = [] #Categories of the package.
 #build = "build/build.rs" #Path to the package build script.
 exclude = [] #Files to exclude when publishing.
@@ -116,12 +116,12 @@ crate-type = ["lib"]   # The crate types to generate.
 required-features = [] # Features required to build this target (N/A for lib).
 
 #[[bin]] #Binary target settings.
-#name = "std_lib"
+#name = "std"
 #test = false
 #bench = false
 #
 #[[bin]]
-#name = "std_lib"
+#name = "std"
 #required-features = ["postgres", "sqlite", "tools"]
 
 [[example]]
@@ -166,7 +166,7 @@ panic = 'abort'
 ##test.test = true
 
 #[[bench]] #Benchmark target settings.
-#bench.name = "std_lib"
+#bench.name = "std"
 #bench.bench = true
 
 #[project]
@@ -241,15 +241,15 @@ ico = ["bmp", "png"]
 maintenance = { status = "..." }
 
 #[patch.crates-io]
-#std_lib = { git = 'https://github.com/murtazaai/std' }
-#std_lib = { path = 'std_lib' }
+#std = { git = 'https://github.com/murtazaai/std' }
+#std = { path = 'std' }
 
 #[dependencies.std]
 #git = 'https://github.com/murtazaai/std'
 
 #[patch.'https://github.com/murtazaai/std']
-#std_lib = { git = 'https://github.com/murtazaai/std', branch = 'main' }
+#std = { git = 'https://github.com/murtazaai/std', branch = 'main' }
 
 #[replace]
-#"std_lib:0.1.0" = { git = 'https://github.com/murtazaai/std' }
-#"std_lib:0.1.0" = { path = 'std' }
+#"std:0.1.0" = { git = 'https://github.com/murtazaai/std' }
+#"std:0.1.0" = { path = 'std' }

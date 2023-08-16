@@ -19,10 +19,10 @@ ls default_*.profraw
 
 # Backlog!
 
-#LLVM_PROFILE_FILE="std_lib.profraw" target/debug/std_lib - \
-#llvm-profdata merge -sparse std_lib.profraw -o std_lib.profdata \
-#llvm-cov show -Xdemangler=rustfilt target/debug/std_lib -instr-profile=std_lib.profdata -show-line-counts-or-regions -show-instantiations -name=add_quoted_string \
+#LLVM_PROFILE_FILE="std.profraw" target/debug/std - \
+#llvm-profdata merge -sparse std.profraw -o std.profdata \
+#llvm-cov show -Xdemangler=rustfilt target/debug/std -instr-profile=std.profdata -show-line-counts-or-regions -show-instantiations -name=add_quoted_string \
 #RUSTFLAGS="-C instrument-coverage"     cargo test --tests \
-#llvm-profdata merge -sparse default_*.profraw -o std_lib.profdata \
-#llvm-cov report --use-color --ignore-filename-regex='~/.cargo/registry' --instr-profile=std_lib.profdata --object target/debug/deps/std_lib-9ebd730377f4c477 --object target/debug/deps/std_lib-91d7b12bec96a30b --show-instantiation-summary --Xdemangler=rustfilt | less -R \
+#llvm-profdata merge -sparse default_*.profraw -o std.profdata \
+#llvm-cov report --use-color --ignore-filename-regex='~/.cargo/registry' --instr-profile=std.profdata --object target/debug/deps/std-9ebd730377f4c477 --object target/debug/deps/std-91d7b12bec96a30b --show-instantiation-summary --Xdemangler=rustfilt | less -R \
 

@@ -4,4 +4,4 @@
 
 ## License
 
-[LICENSE-MURTAZAI](https://github.com/murtazaai/std_lib/blob/main/LICENSE-MURTAZAI) license.
+[LICENSE-MURTAZAI](https://github.com/murtazaai/std/blob/main/LICENSE-MURTAZAI) license.
