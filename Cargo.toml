@@ -125,7 +125,7 @@ required-features = [] # Features required to build this target (N/A for lib).
 #required-features = ["postgres", "sqlite", "tools"]
 
 [[example]]
-name = "std_lib"
+name = "std"
 crate-type = ["staticlib"]
 path = "examples/example.rs"
 
@@ -170,7 +170,7 @@ panic = 'abort'
 #bench.bench = true
 
 #[project]
-#name = "std_lib"
+#name = "std"
 #version = "0.1.0"
 
 [dependencies] #Package library dependencies.
@@ -244,12 +244,12 @@ maintenance = { status = "..." }
 #std_lib = { git = 'https://github.com/murtazaai/std' }
 #std_lib = { path = 'std_lib' }
 
-#[dependencies.std_lib]
+#[dependencies.std]
 #git = 'https://github.com/murtazaai/std'
 
 #[patch.'https://github.com/murtazaai/std']
 #std_lib = { git = 'https://github.com/murtazaai/std', branch = 'main' }
 
 #[replace]
-#"std_lib:0.1.0" = { git = 'https://github.com/murtazaai/std_lib' }
-#"std_lib:0.1.0" = { path = 'std_lib' }
+#"std_lib:0.1.0" = { git = 'https://github.com/murtazaai/std' }
+#"std_lib:0.1.0" = { path = 'std' }
