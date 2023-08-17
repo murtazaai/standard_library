@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MURTAZAI
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [package] #Defines a package.
-name = "standard-library" #The name of the package.
+name = "standard_library" #The name of the package.
 version = "0.1.0" #The version of the package.
 authors = ["Murtaza Ali Imtiaz <native@murtazai.org>"] #The authors of the package.
 edition = "2021" #The Rust edition.
@@ -9,9 +9,9 @@ rust-version = "1.56.0" #The minimal supported Rust version.
 description = "Just a playground." #A description of the package.
 documentation = "" #URL of the package documentation.
 readme = "README.md" #Path to the package's README file.
-homepage = "https://github.com/murtazaai/standard-library" #URL of the package homepage.
-repository = "https://github.com/murtazaai/standard-library" #URL of the package source repository.
-keywords = ["standard-library", "playground"] #Keywords for the package.
+homepage = "https://github.com/murtazaai/standard_library" #URL of the package homepage.
+repository = "https://github.com/murtazaai/standard_library" #URL of the package source repository.
+keywords = ["standard_library", "playground"] #Keywords for the package.
 categories = [] #Categories of the package.
 #build = "build/build.rs" #Path to the package build script.
 exclude = [] #Files to exclude when publishing.
@@ -44,11 +44,11 @@ autobenches = false #Disables bench auto discovery.
 #rustc = "rustc"               # the rust compiler tool
 #rustc-wrapper = "…"           # run this wrapper instead of `rustc`
 #rustc-workspace-wrapper = "…" # run this wrapper instead of `rustc` for workspace members
-#rustandard-libraryoc = "rustandard-libraryoc"           # the doc generator tool
+#rustandard_libraryoc = "rustandard_libraryoc"           # the doc generator tool
 #target = "triple"             # build for the target triple (ignored by `cargo install`)
 #target-dir = "target"         # path of where to place all generated artifacts
 #rustflags = ["…", "…"]        # custom flags to pass to all compiler invocations
-#rustandard-libraryocflags = ["…", "…"]     # custom flags to pass to rustandard-libraryoc
+#rustandard_libraryocflags = ["…", "…"]     # custom flags to pass to rustandard_libraryoc
 #incremental = true            # whether or not to enable incremental compilation
 #dep-info-basedir = "…"        # path for the base directory for targets in depfiles
 
@@ -86,7 +86,7 @@ members = [
 #[workspace.dependencies]
 #cc = "1.0.73"
 #rand = "0.8.5"
-#regex = { version = "1.6.0", default-features = false, features = ["standard-library"] }
+#regex = { version = "1.6.0", default-features = false, features = ["standard_library"] }
 ## [PROJECT_DIR]/bar/Cargo.toml
 #[project]
 #name = "abc"
@@ -102,7 +102,7 @@ members = [
 #rand.workspace = true
 
 [lib] #Library target settings.
-name = "standard-library"           # The name of the target.
+name = "standard_library"           # The name of the target.
 path = "src/lib.rs"    # The source file of the target.
 test = true            # Is tested by default.
 doctest = true         # Documentation examples are tested by default.
@@ -116,16 +116,16 @@ crate-type = ["lib"]   # The crate types to generate.
 required-features = [] # Features required to build this target (N/A for lib).
 
 #[[bin]] #Binary target settings.
-#name = "standard-library"
+#name = "standard_library"
 #test = false
 #bench = false
 #
 #[[bin]]
-#name = "standard-library"
+#name = "standard_library"
 #required-features = ["postgres", "sqlite", "tools"]
 
 [[example]]
-name = "standard-library"
+name = "standard_library"
 crate-type = ["staticlib"]
 path = "examples/example.rs"
 
@@ -166,11 +166,11 @@ panic = 'abort'
 ##test.test = true
 
 #[[bench]] #Benchmark target settings.
-#bench.name = "standard-library"
+#bench.name = "standard_library"
 #bench.bench = true
 
 #[project]
-#name = "standard-library"
+#name = "standard_library"
 #version = "0.1.0"
 
 [dependencies] #Package library dependencies.
@@ -241,15 +241,15 @@ ico = ["bmp", "png"]
 maintenance = { status = "..." }
 
 #[patch.crates-io]
-#standard-library = { git = 'https://github.com/murtazaai/standard-library' }
-#standard-library = { path = 'standard-library' }
+#standard_library = { git = 'https://github.com/murtazaai/standard_library' }
+#standard_library = { path = 'standard_library' }
 
-#[dependencies.standard-library]
-#git = 'https://github.com/murtazaai/standard-library'
+#[dependencies.standard_library]
+#git = 'https://github.com/murtazaai/standard_library'
 
-#[patch.'https://github.com/murtazaai/standard-library']
-#standard-library = { git = 'https://github.com/murtazaai/standard-library', branch = 'main' }
+#[patch.'https://github.com/murtazaai/standard_library']
+#standard_library = { git = 'https://github.com/murtazaai/standard_library', branch = 'main' }
 
 #[replace]
-#"standard-library:0.1.0" = { git = 'https://github.com/murtazaai/standard-library' }
-#"standard-library:0.1.0" = { path = 'standard-library' }
+#"standard_library:0.1.0" = { git = 'https://github.com/murtazaai/standard_library' }
+#"standard_library:0.1.0" = { path = 'standard_library' }

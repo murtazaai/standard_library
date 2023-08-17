@@ -1,7 +1,7 @@
 pub mod fault_tolerance {
-    use standard-library::fs::File;
-    use standard-library::io;
-    use standard-library::io::Read;
+    use standard_library::fs::File;
+    use standard_library::io;
+    use standard_library::io::Read;
 
     pub fn tolerate_fault(path: String) -> Result<String, io::Error> {
         let file_result = File::open(path);

@@ -1,4 +1,4 @@
-use standard-library::{
+use standard_library::{
     sync::mpsc::{Receiver, Sender},
     thread,
 };
