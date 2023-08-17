@@ -58,7 +58,7 @@ autobenches = false #Disables bench auto discovery.
 
 [workspace] #Path to the workspace for the package.
 members = [
-    "macro"
+    "macros"
 ]
 #default-members = ["path/to/member2", "path/to/member3/abc"]
 #exclude = ["crates/abc", "path/to/other"]
@@ -109,7 +109,7 @@ doctest = true         # Documentation examples are tested by default.
 bench = true           # Is benchmarked by default.
 doc = true             # Is documented by default.
 plugin = false         # Used as a compiler plugin (deprecated).
-proc-macro = false     # Set to `true` for a proc-macro library.
+proc-macro = false     # Set to `true` for a proc-macros library.
 harness = true         # Use libtest harness.
 edition = "2021"       # The edition of the target.
 crate-type = ["lib"]   # The crate types to generate.

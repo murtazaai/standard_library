@@ -1,5 +1,6 @@
-use standard_library::fmt::{Debug, Display};
+use std::fmt::{Debug, Display};
 
+#[allow(dead_code)]
 pub fn f0<T, U /*, F*/>(t: T, u: U /*, f: F*/) -> String
 where
     T: Display + Clone + Debug,

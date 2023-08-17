@@ -13,9 +13,10 @@ mod process;
 mod puzzle;
 mod reliability;
 mod seed;
-mod standard_library;
+mod std;
 mod store;
 mod thread_pool;
+mod macros;
 
 /// Unit test cases [`tests`]
 /// Verify and validate.
@@ -26,6 +27,7 @@ mod tests {
     use crate::reliability::fault_tolerance::tolerate_fault;
     use assert_type_eq::assert_type_eq;
     use http::Request;
+    use crate::{create_function, print_result};
 
     /// [`String`] is a [`Vec`] array of [`byte`].
     #[test]
@@ -40,7 +42,7 @@ mod tests {
     /// Slice a [`String`]
     #[test]
     fn test_string_slice() {
-        use standard_library::string::String;
+        use std::string::String;
 
         let string = String::from("This is a string!");
 
@@ -59,7 +61,7 @@ mod tests {
     /// [`Hashmap`] test.
     #[test]
     fn test_human() {
-        use standard_library::collections::HashMap;
+        use std::collections::HashMap;
 
         use crate::origin::life::tree::{Body, Human, Kind};
 
@@ -156,7 +158,7 @@ mod tests {
     /// Weak reference count.
     #[test]
     fn test_ref_counter() {
-        use standard_library::rc::Rc;
+        use std::rc::Rc;
 
         use crate::bug::List;
 
@@ -174,7 +176,7 @@ mod tests {
     /// [`RefCell`] verification.
     #[test]
     fn test_ref_cell() {
-        use standard_library::cell::RefCell;
+        use std::cell::RefCell;
 
         let ref_cell = RefCell::new(vec!["Hello!".to_string()]);
 
@@ -202,7 +204,7 @@ mod tests {
     /// Message queuing
     #[test]
     fn test_thread_join() {
-        use standard_library::sync::mpsc::{self, Receiver, Sender};
+        use std::sync::mpsc::{self, Receiver, Sender};
 
         use crate::thread_pool::{receive_message_on_channel, send_message_on_channel};
 
@@ -223,7 +225,7 @@ mod tests {
     /// [`MutexGuard`]
     #[test]
     fn test_mutex() {
-        use standard_library::sync::Mutex;
+        use std::sync::Mutex;
 
         let mutex = Mutex::new(1);
 
@@ -237,7 +239,7 @@ mod tests {
     /// Custom [`Character`] type.
     #[test]
     fn test_character() {
-        use crate::standard_library::Character;
+        use crate::std::Character;
 
         let character = Character('a');
 
@@ -246,6 +248,7 @@ mod tests {
 
     /// [`vec_i32`]
     #[test]
+    #[macro_use]
     fn test_filter() {
         let vec = vec![0, 2, 4, 6, 8];
 
@@ -375,5 +378,16 @@ mod tests {
         let expected_format = String::from("T: 10, U: 20");
 
         assert_eq!(current_format, expected_format);
+    }
+
+    // Procedural macros
+    #[test]
+    #[macro_use]
+    fn test_procedural_macros() {
+        create_function!(func);
+
+        func();
+
+        print_result!("printf");
     }
 }

@@ -1,7 +1,7 @@
 use core::panic;
-use standard_library::cell::RefCell;
-use standard_library::ops::Deref;
-use standard_library::rc::{Rc, Weak};
+use std::cell::RefCell;
+use std::ops::Deref;
+use std::rc::{Rc, Weak};
 
 #[allow(warnings)]
 pub fn parse_string_to_i32(string: String) -> i32 {
@@ -26,7 +26,7 @@ pub fn borrow_lifetime() {
     println!("{}", x.to_string())
 }
 
-use standard_library::fmt::Debug;
+use std::fmt::Debug;
 
 trait T {}
 
@@ -36,7 +36,7 @@ pub struct S {}
 impl T for S {}
 
 impl Debug for S {
-    fn fmt(&self, f: &mut standard_library::fmt::Formatter<'_>) -> standard_library::fmt::Result {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("S").finish()
     }
 }
@@ -46,7 +46,7 @@ pub type Type = S;
 
 #[allow(warnings)]
 pub fn function<'a>(in_1: &'a Type/* , mut out_1: &'a Type */) -> &'a Type
-where  
+where
     Type: Clone + Debug
 {
     let out_1 = in_1;
@@ -84,24 +84,24 @@ pub fn deref() -> u8 {
 
 #[allow(warnings)]
 pub enum List {
-    Cons(i32, Rc<List>), 
+    Cons(i32, Rc<List>),
     Nil,
 }
 
 #[allow(dead_code)]
-pub enum Listandard_libraryS {
-    Val(i32, RefCell<Rc<Listandard_libraryS>>),
+pub enum ListDS {
+    Val(i32, RefCell<Rc<ListDS>>),
     Nil,
 }
 
 #[allow(dead_code)]
-impl Listandard_libraryS {
-    fn new(val :i32) -> Listandard_libraryS {
+impl ListDS {
+    fn new(val :i32) -> ListDS {
         Self::Val(val, RefCell::new(Rc::new(Self::Nil)))
     }
 
     #[allow(unused_variables)]
-    fn iterate(&self) -> Option<&RefCell<Rc<Listandard_libraryS>>> {
+    fn iterate(&self) -> Option<&RefCell<Rc<ListDS>>> {
         match self {
             Self::Val(val, rc) => Some(rc),
             Self::Nil => None,
@@ -110,8 +110,8 @@ impl Listandard_libraryS {
 }
 
 #[allow(dead_code)]
-pub fn new_list_ds(val: i32) -> Listandard_libraryS {
-    Listandard_libraryS::new(val)
+pub fn new_list_ds(val: i32) -> ListDS {
+    ListDS::new(val)
 }
 
 #[allow(dead_code)]
