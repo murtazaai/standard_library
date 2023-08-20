@@ -301,7 +301,7 @@ mod tests {
     fn read_file_content() {
         use crate::ipfs::read_file_content;
 
-        let current_path = String::from("./src/methodology.rs");
+        let current_path = String::from("./src/batch.rs");
 
         /// let invalid_path = String::from("./abc/abc.rs");
         let current_result = read_file_content(current_path);
@@ -350,7 +350,7 @@ mod tests {
     /// fault
     #[test]
     fn negative_test_case_tolerate_fault() {
-        let result = tolerate_fault("./invalid_dir/methodology.rs".to_string());
+        let result = tolerate_fault("./invalid_dir/batch".to_string());
 
         let error = result.unwrap_err();
 
@@ -361,7 +361,7 @@ mod tests {
     /// positive test case
     #[test]
     fn test_no_fault() {
-        let content = tolerate_fault("./src/methodology.rs".to_string()).unwrap();
+        let content = tolerate_fault("./src/batch.rs".to_string()).unwrap();
         // .expect(&*"entity not found: Os { code: 2, kind: NotFound, message: \"No such file or directory\" }: Os { code: 2, kind: NotFound, message: \"No such file or directory\" }".to_string());
 
         if Some(&content).is_some() {
