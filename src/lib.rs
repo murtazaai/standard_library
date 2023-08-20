@@ -27,7 +27,7 @@ mod tests {
     use crate::reliability::fault_tolerance::tolerate_fault;
     use assert_type_eq::assert_type_eq;
     use http::Request;
-    use crate::{create_function, print_result};
+    use crate::{and_or, create_function, find_min, print_result, to_bytes};
 
     /// [`String`] is a [`Vec`] array of [`byte`].
     #[test]
@@ -248,7 +248,6 @@ mod tests {
 
     /// [`vec_i32`]
     #[test]
-    #[macro_use]
     fn test_filter() {
         let vec = vec![0, 2, 4, 6, 8];
 
@@ -382,12 +381,18 @@ mod tests {
 
     // Procedural macros
     #[test]
-    #[macro_use]
-    fn test_procedural_macros() {
+    fn test_declarative_macros() {
         create_function!(func);
 
         func();
 
         print_result!("printf");
+
+        and_or!(1i32 + 1 == 2i32; and 2i32 * 2 == 4i32);
+        and_or!(true; or false);
+
+        assert_eq!("A", find_min!("A", "B"));
+
+        assert_eq!("A".as_bytes(), to_bytes!("A"));
     }
 }

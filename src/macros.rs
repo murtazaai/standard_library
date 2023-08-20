@@ -1,4 +1,6 @@
 /// Declarative macros
+
+/// 'create_function' creates a new function.
 #[macro_export]
 macro_rules! create_function {
     // This macros takes an argument of designator `ident` and
@@ -13,6 +15,7 @@ macro_rules! create_function {
     };
 }
 
+/// 'print_result' prints the results.
 #[macro_export]
 macro_rules! print_result {
     // This macros takes an expression of type `expr` and prints
@@ -24,5 +27,46 @@ macro_rules! print_result {
                  stringify!($expression),
                  $expression);
     };
+}
+
+/// `and_or!` will compare `$left` and `$right`
+/// in different ways depending on how you invoke it:
+#[macro_export]
+macro_rules! and_or {
+    // Arguments don't need to be separated by a comma.
+    // Any template can be used!
+    ($left:expr; and $right:expr) => {
+        println!("{:?} and {:?} is {:?}",
+                 stringify!($left),
+                 stringify!($right),
+                 $left && $right)
+    };
+    // ^ each arm must end with a semicolon.
+    ($left:expr; or $right:expr) => {
+        println!("{:?} or {:?} is {:?}",
+                 stringify!($left),
+                 stringify!($right),
+                 $left || $right)
+    };
+}
+
+/// `find_min!` will calculate the minimum of any number of arguments.
+#[macro_export]
+macro_rules! find_min {
+    // Base case:
+    ($x:expr) => ($x);
+    // `$x` followed by at least one `$y,`
+    ($x:expr, $($y:expr),+) => (
+        // Call `find_min!` on the tail `$y`
+        std::cmp::min($x, find_min!($($y),+))
+    )
+}
+
+/// 'to_bytes' converts '*str' into bytes.
+#[macro_export]
+macro_rules! to_bytes {
+    ($a:expr) => {
+        $a.as_bytes()
+    }
 }
 
