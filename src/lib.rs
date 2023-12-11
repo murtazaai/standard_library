@@ -17,17 +17,25 @@ mod std;
 mod store;
 mod thread_pool;
 mod macros;
+mod file;
+mod lifetime;
+mod data_structure;
+mod display;
+// mod r#macro;
 
 /// Unit test cases [`tests`]
 /// Verify and validate.
 #[cfg(test)]
 mod tests {
-    use crate::generic::f0;
+    use crate::generic::{f0, Point};
     use crate::ipfs::btree_set_overload;
     use crate::reliability::fault_tolerance::tolerate_fault;
     use assert_type_eq::assert_type_eq;
     use http::Request;
-    use crate::{and_or, create_function, find_min, print_result, to_bytes};
+    use crate::{and_or, create_function, find_min, print_result, to_bytes/*, vector*/};
+    use crate::data_structure::AveragedCollection;
+    use crate::display::coordinates;
+    use crate::lifetime::{first_word, longest, longest_with_an_announcement, Rectangle};
 
     /// [`String`] is a [`Vec`] array of [`byte`].
     #[test]
@@ -395,4 +403,114 @@ mod tests {
 
         assert_eq!("A".as_bytes(), to_bytes!("A"));
     }
+
+    #[test]
+    fn test_random() {
+        let hello = String::from("abc");
+        assert_eq!(hello.as_bytes(), vec![97, 98, 99]);
+
+    }
+
+    #[test]
+    fn test_hashmap() {
+        use std::collections::HashMap;
+
+        let mut scores = HashMap::new();
+
+        let blue_0 = String::from("Blue");
+        let yellow_0 = String::from("Yellow");
+
+        scores.insert(blue_0, 10);
+        scores.insert(yellow_0, 50);
+
+        let blue_1 = String::from("Blue");
+        let yellow_1 = String::from("Yellow");
+
+        assert_eq!(scores.get(&blue_1), Some(&10));
+        assert_eq!(scores.get(&yellow_1), Some(&50));
+    }
+
+    #[test]
+    fn recoverable_errors() {
+        use crate::file::read_username_from_file;
+
+        let username = String::new();
+
+        let username_1 = read_username_from_file("src/file/username", username).unwrap();
+
+        assert_eq!(username_1, String::from("alfred"));
+    }
+
+    #[test]
+    fn test_generics() {
+        let p1 = Point { x: 5, y: 10.4 };
+        let p2 = Point { x: "Hello", y: 'c' };
+
+        let p3 = p1.mixup(p2);
+
+        assert_eq!(p3.x, 5);
+        assert_eq!(p3.y, 'c');
+    }
+
+    #[test]
+    fn test_lifetime_longest() {
+        let a = "abc";
+        let b = "defg";
+        let longest = longest(a, b);
+
+        assert_eq!(longest, b);
+    }
+
+    #[test]
+    fn test_lifetime_first_word() {
+        let a = "First Last";
+
+        assert_eq!(first_word(a), "First");
+    }
+
+    #[test]
+    fn test_longest_with_announcement() {
+        assert_eq!(longest_with_an_announcement("United Doom", "United Africa", "Destination Somalia"), "United Africa");
+    }
+
+    #[test]
+    fn test_rectangle() {
+        let rectangle = Rectangle {
+            width: 2,
+            height: 3,
+        };
+
+        assert!(!rectangle.can_hold(Rectangle {
+            width: 3,
+            height: 4,
+        }));
+    }
+
+    #[test]
+    fn test_average_collection() {
+        let mut average_collection = AveragedCollection {
+            list: vec![],
+            average: 0.0000,
+        };
+        // test add
+        average_collection.add(10);
+        average_collection.add(11);
+        average_collection.add(13);
+        assert_eq!(average_collection.list, vec![10, 11, 13]);
+
+        average_collection.remove();
+
+        average_collection.average();
+        assert_eq!(average_collection.average, 10.5);
+    }
+
+    #[test]
+    fn test_coordinates() {
+        assert_eq!(coordinates(&(2, 3)), 5);
+    }
+
+    // #[test]
+    // fn functional_macro() {
+    //     assert_eq!(vector!(vec![2, 3, 4]), vec![2, 3, 4]);
+    // }
 }
