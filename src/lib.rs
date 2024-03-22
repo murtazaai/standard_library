@@ -1,26 +1,32 @@
+//! Custom Standard Rust Library
 // #![feature(unboxed_closures)]
 // #![feature(tuple_trait)]
-
-mod bug;
-mod fact;
-mod generic;
-mod geo;
-mod ipfs;
-mod launch;
-mod listener;
-mod origin;
-mod process;
-mod puzzle;
-mod reliability;
-mod seed;
-mod std;
-mod store;
-mod thread_pool;
-mod macros;
-mod file;
-mod lifetime;
-mod data_structure;
-mod display;
+/// #Sample Tests
+/// ```
+/// fn exponent() {
+///     assert_eq!((2i32).pow(3), 8);
+/// }
+/// ```
+pub mod bug;
+pub mod fact;
+pub mod generic;
+pub mod geo;
+pub mod ipfs;
+pub mod launch;
+pub mod listener;
+pub mod origin;
+pub mod process;
+pub mod puzzle;
+pub mod reliability;
+pub mod seed;
+pub mod std;
+pub mod store;
+pub mod thread_pool;
+pub mod macros;
+pub mod file;
+pub mod lifetime;
+pub mod data_structure;
+pub mod display;
 #[allow(dead_code)]
 pub fn sort(array: &mut Vec<i32>) {
     for i in 0..array.len() {

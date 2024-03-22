@@ -11,14 +11,14 @@ where
 }
 
 #[allow(dead_code)]
-pub struct Point<X1, Y1> {
-    pub(crate) x: X1,
-    pub(crate) y: Y1,
+pub struct Point<T, U> {
+    pub(crate) x: T,
+    pub(crate) y: U,
 }
 
-impl<X1, Y1> Point<X1, Y1> {
+impl<T, U> Point<T, U> {
     #[allow(dead_code)]
-    pub(crate) fn mixup<X2, Y2>(self, other: Point<X2, Y2>) -> Point<X1, Y2> {
+    pub(crate) fn mixup<X2, Y2>(self, other: Point<X2, Y2>) -> Point<T, Y2> {
         Point {
             x: self.x,
             y: other.y,
