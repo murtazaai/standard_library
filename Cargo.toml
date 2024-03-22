@@ -165,9 +165,10 @@ panic = 'abort'
 ##example.test = true
 ##test.test = true
 
-#[[bench]] #Benchmark target settings.
-#bench.name = "standard_library"
-#bench.bench = true
+ [[bench]] #Benchmark target settings.
+ name = "sort_benchmarks"
+ bench = true
+ harness = false
 
 #[project]
 #name = "standard_library"
@@ -185,6 +186,7 @@ env-file-reader = "0.3.0"
 
 # standard crate data is left out
 [dev-dependencies] #Dependencies for examples, tests, and benchmarks.
+criterion = "0.5.1"
 #pretty_assertions = "1"
 #rand = { workspace = true, optional = true }
 

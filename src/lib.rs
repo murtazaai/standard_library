@@ -1,5 +1,5 @@
-#![feature(unboxed_closures)]
-#![feature(tuple_trait)]
+// #![feature(unboxed_closures)]
+// #![feature(tuple_trait)]
 
 mod bug;
 mod fact;
@@ -21,6 +21,19 @@ mod file;
 mod lifetime;
 mod data_structure;
 mod display;
+#[allow(dead_code)]
+pub fn sort(array: &mut Vec<i32>) {
+    for i in 0..array.len() {
+        for j in 0..array.len() - i - 1 {
+            if array[j + 1] < array[j] {
+                // let tmp = array[j];
+                // array[j] = array[j + 1];
+                // array[j + 1] = tmp;
+                array.swap(j, j + 1);
+            }
+        }
+    }
+}
 // mod r#macro;
 
 /// Unit test cases [`tests`]
@@ -42,7 +55,7 @@ mod tests {
     fn test_as_byte_array_from_string() {
         let value_string = String::from("value");
         let actual_byte_array = value_string.as_bytes();
-        let current_byte_array = actual_byte_array.clone();
+        let current_byte_array = actual_byte_array;
         assert_eq!(actual_byte_array, current_byte_array);
         assert_eq!(value_string.as_bytes(), current_byte_array);
     }
