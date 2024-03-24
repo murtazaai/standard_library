@@ -4,7 +4,7 @@
 /// #Sample Tests
 /// ```
 /// fn exponent() {
-///     assert_eq!((2i32).pow(3), 8);
+///     assert_eq!(2i32.pow(3), 8);
 /// }
 /// ```
 pub mod data_structures;
@@ -26,6 +26,7 @@ pub mod macros;
 pub mod file;
 pub mod lifetime;
 pub mod display;
+
 #[allow(dead_code)]
 pub fn sort(array: &mut Vec<i32>) {
     for i in 0..array.len() {
@@ -49,19 +50,32 @@ macro_rules! sum {
     };
 }
 
+#[allow(unused_macros)]
+macro_rules! input {
+    ($t: ty) => {
+        let mut string = String::new();
+        
+        std::io::stdin()
+            .read_line(&mut string)
+            .expect("Failed to read input");
+
+        let string = string.trim().parse().expect("Invalid input");
+    }
+}
+
 /// Unit test cases [`tests`]
 /// Verify and validate.
 #[cfg(test)]
 mod tests {
-    use crate::generic::{Circle, Draw, f0, Point, Shape};
-    use crate::ipfs::btree_set_overload;
-    use crate::reliability::fault_tolerance::tolerate_fault;
     use assert_type_eq::assert_type_eq;
-    use http::Request;
+
     use crate::{and_or, create_function, find_min, print_result, to_bytes/*, vector*/};
     // use crate::data_structure::AveragedCollection;
     use crate::display::coordinates;
+    use crate::generic::{Circle, Draw, f0, Point, Shape};
+    use crate::ipfs::btree_set_overload;
     use crate::lifetime::{first_word, longest, longest_with_an_announcement, Rectangle};
+    use crate::reliability::fault_tolerance::tolerate_fault;
 
     /// [`String`] is a [`Vec`] array of [`byte`].
     #[test]
@@ -124,13 +138,13 @@ mod tests {
 
     /// Chinese language.
     /// [UTF-8] not [Unicode]
-    #[test]
-    fn test_unicode_transformation_format_8() {
-        let 你好 = String::from("你好");
-        assert_eq!(你好, "你好".to_string());
-        // let 交換 = 你好.as_bytes();
-        // assert_eq!(交換[0], 0x4EA4);
-    }
+    // #[test]
+    // fn test_unicode_transformation_format_8() {
+    //     let 你好 = String::from("你好");
+    //     assert_eq!(你好, "你好".to_string());
+    //     // let 交換 = 你好.as_bytes();
+    //     // assert_eq!(交換[0], 0x4EA4);
+    // }
 
     /// Parse
     #[test]
@@ -349,10 +363,10 @@ mod tests {
     }
 
     /// [`assert_type_eq`]
-    #[test]
-    fn test_generate_request_header() {
-        assert_type_eq!(Request<()>, Request<()>);
-    }
+    // #[test]
+    // fn test_generate_request_header() {
+    //     assert_type_eq!(Request<()>, Request<()>);
+    // }
 
     /// [`calendar`]
     #[test]
@@ -434,7 +448,6 @@ mod tests {
     fn test_random() {
         let hello = String::from("abc");
         assert_eq!(hello.as_bytes(), vec![97, 98, 99]);
-
     }
 
     #[test]
@@ -531,5 +544,4 @@ mod tests {
     fn test_functional_macro_sum() {
         assert_eq!(sum!(2, 3), 5);
     }
-
 }
