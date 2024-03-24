@@ -183,6 +183,7 @@ threadpool = "1.8.1"
 http = "0.2.9"
 assert-type-eq = "0.1.0"
 env-file-reader = "0.3.0"
+negative-impl = "0.1.4"
 
 # standard crate data is left out
 [dev-dependencies] #Dependencies for examples, tests, and benchmarks.

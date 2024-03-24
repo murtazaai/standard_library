@@ -83,25 +83,25 @@ pub fn deref() -> u8 {
 }
 
 #[allow(warnings)]
-pub enum List {
-    Cons(i32, Rc<List>),
+pub enum ListEnum {
+    Cons(i32, Rc<ListEnum>),
     Nil,
 }
 
 #[allow(dead_code)]
-pub enum ListDS {
-    Val(i32, RefCell<Rc<ListDS>>),
+pub enum StackEnum {
+    Val(i32, RefCell<Rc<StackEnum>>),
     Nil,
 }
 
 #[allow(dead_code)]
-impl ListDS {
-    fn new(val :i32) -> ListDS {
+impl StackEnum {
+    fn new(val :i32) -> StackEnum {
         Self::Val(val, RefCell::new(Rc::new(Self::Nil)))
     }
 
     #[allow(unused_variables)]
-    fn iterate(&self) -> Option<&RefCell<Rc<ListDS>>> {
+    fn iterate(&self) -> Option<&RefCell<Rc<StackEnum>>> {
         match self {
             Self::Val(val, rc) => Some(rc),
             Self::Nil => None,
@@ -110,8 +110,8 @@ impl ListDS {
 }
 
 #[allow(dead_code)]
-pub fn new_list_ds(val: i32) -> ListDS {
-    ListDS::new(val)
+pub fn new_list_ds(val: i32) -> StackEnum {
+    StackEnum::new(val)
 }
 
 #[allow(dead_code)]

@@ -2,6 +2,7 @@ use std::{
     sync::mpsc::{Receiver, Sender},
     thread,
 };
+use negative_impl::negative_impl;
 
 const THREADS: i32 = 10;
 
@@ -26,3 +27,14 @@ pub fn receive_message_on_channel(receiver: Receiver<i32>) -> Vec<i32> {
 
     receiver_ds
 }
+
+struct Thread {}
+
+#[negative_impl]
+impl !Send for Thread {}
+
+#[negative_impl]
+impl !Sync for Thread {}
+
+#[allow(dead_code)]
+fn func<T: ?Sized>(_t: &T) {}

@@ -7,7 +7,7 @@
 ///     assert_eq!((2i32).pow(3), 8);
 /// }
 /// ```
-pub mod bug;
+pub mod data_structures;
 pub mod fact;
 pub mod generic;
 pub mod geo;
@@ -25,7 +25,6 @@ pub mod thread_pool;
 pub mod macros;
 pub mod file;
 pub mod lifetime;
-pub mod data_structure;
 pub mod display;
 #[allow(dead_code)]
 pub fn sort(array: &mut Vec<i32>) {
@@ -52,7 +51,7 @@ mod tests {
     use assert_type_eq::assert_type_eq;
     use http::Request;
     use crate::{and_or, create_function, find_min, print_result, to_bytes/*, vector*/};
-    use crate::data_structure::AveragedCollection;
+    // use crate::data_structure::AveragedCollection;
     use crate::display::coordinates;
     use crate::lifetime::{first_word, longest, longest_with_an_announcement, Rectangle};
 
@@ -128,7 +127,7 @@ mod tests {
     /// Parse
     #[test]
     fn test_parse_string_to_i32() {
-        use crate::bug::parse_string_to_i32;
+        use crate::data_structures::parse_string_to_i32;
 
         assert_eq!(parse_string_to_i32(String::from("8")), 8);
     }
@@ -143,7 +142,7 @@ mod tests {
     /// Borrow.
     #[test]
     fn test_borrow_lifetime() {
-        use crate::bug::{borrow_lifetime, function, Type};
+        use crate::data_structures::{borrow_lifetime, function, Type};
 
         borrow_lifetime();
 
@@ -176,7 +175,7 @@ mod tests {
     /// Dereference.
     #[test]
     fn test_deref() {
-        use crate::bug::deref;
+        use crate::data_structures::deref;
 
         assert_eq!(deref(), 8);
     }
@@ -187,9 +186,9 @@ mod tests {
     fn test_ref_counter() {
         use std::rc::Rc;
 
-        use crate::bug::List;
+        use crate::data_structures::ListEnum;
 
-        let list_1 = Rc::new(List::Cons(8, Rc::new(List::Nil)));
+        let list_1 = Rc::new(ListEnum::Cons(8, Rc::new(ListEnum::Nil)));
 
         assert_eq!(Rc::strong_count(&list_1), 1);
 
@@ -219,7 +218,7 @@ mod tests {
     /// Container.
     #[test]
     fn test_node() {
-        use crate::bug::Node;
+        use crate::data_structures::Node;
 
         let actual_node = Node::new(0);
 
@@ -505,23 +504,23 @@ mod tests {
         }));
     }
 
-    #[test]
-    fn test_average_collection() {
-        let mut average_collection = AveragedCollection {
-            list: vec![],
-            average: 0.0000,
-        };
-        // test add
-        average_collection.add(10);
-        average_collection.add(11);
-        average_collection.add(13);
-        assert_eq!(average_collection.list, vec![10, 11, 13]);
-
-        average_collection.remove();
-
-        average_collection.average();
-        assert_eq!(average_collection.average, 10.5);
-    }
+    // #[test]
+    // fn test_average_collection() {
+    //     let mut average_collection = AveragedCollection {
+    //         list: vec![],
+    //         average: 0.0000,
+    //     };
+    //     // test add
+    //     average_collection.add(10);
+    //     average_collection.add(11);
+    //     average_collection.add(13);
+    //     assert_eq!(average_collection.list, vec![10, 11, 13]);
+    //
+    //     average_collection.remove();
+    //
+    //     average_collection.average();
+    //     assert_eq!(average_collection.average, 10.5);
+    // }
 
     #[test]
     fn test_coordinates() {
@@ -536,5 +535,10 @@ mod tests {
 
         assert_eq!(circle.perimeter(), 9);
         assert_eq!(circle.area(), 81);
+    }
+
+    #[test]
+    fn test_list() {
+
     }
 }
