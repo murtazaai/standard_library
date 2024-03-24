@@ -46,7 +46,7 @@ pub fn sort(array: &mut Vec<i32>) {
 /// Verify and validate.
 #[cfg(test)]
 mod tests {
-    use crate::generic::{f0, Point};
+    use crate::generic::{Circle, Draw, f0, Point, Shape};
     use crate::ipfs::btree_set_overload;
     use crate::reliability::fault_tolerance::tolerate_fault;
     use assert_type_eq::assert_type_eq;
@@ -528,8 +528,13 @@ mod tests {
         assert_eq!(coordinates(&(2, 3)), 5);
     }
 
-    // #[test]
-    // fn functional_macro() {
-    //     assert_eq!(vector!(vec![2, 3, 4]), vec![2, 3, 4]);
-    // }
+    #[test]
+    fn test_circle() {
+        let circle = Circle {
+            length: 9,
+        };
+
+        assert_eq!(circle.perimeter(), 9);
+        assert_eq!(circle.area(), 81);
+    }
 }

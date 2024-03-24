@@ -25,3 +25,29 @@ impl<T, U> Point<T, U> {
         }
     }
 }
+
+pub trait Draw {
+    fn perimeter(&self) -> i32;
+}
+
+pub trait Shape: Draw {
+    fn area(&self) -> i32;
+}
+
+pub struct Circle  {
+    pub length: i32,
+}
+
+impl Draw for Circle {
+    fn perimeter(&self) -> i32 {
+        self.length
+    }
+}
+
+impl Shape for Circle {
+    fn area(&self) -> i32 {
+        self.length .pow(2)
+    }
+}
+
+
