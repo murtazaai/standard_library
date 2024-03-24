@@ -41,6 +41,14 @@ pub fn sort(array: &mut Vec<i32>) {
 }
 // mod r#macro;
 
+/// Functional macros
+#[allow(unused_macros)]
+macro_rules! sum {
+    ($e1: expr, $e2: expr) => {
+        $e1 + $e2
+    };
+}
+
 /// Unit test cases [`tests`]
 /// Verify and validate.
 #[cfg(test)]
@@ -504,24 +512,6 @@ mod tests {
         }));
     }
 
-    // #[test]
-    // fn test_average_collection() {
-    //     let mut average_collection = AveragedCollection {
-    //         list: vec![],
-    //         average: 0.0000,
-    //     };
-    //     // test add
-    //     average_collection.add(10);
-    //     average_collection.add(11);
-    //     average_collection.add(13);
-    //     assert_eq!(average_collection.list, vec![10, 11, 13]);
-    //
-    //     average_collection.remove();
-    //
-    //     average_collection.average();
-    //     assert_eq!(average_collection.average, 10.5);
-    // }
-
     #[test]
     fn test_coordinates() {
         assert_eq!(coordinates(&(2, 3)), 5);
@@ -538,7 +528,8 @@ mod tests {
     }
 
     #[test]
-    fn test_list() {
-
+    fn test_functional_macro_sum() {
+        assert_eq!(sum!(2, 3), 5);
     }
+
 }
