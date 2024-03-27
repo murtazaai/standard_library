@@ -63,12 +63,19 @@ macro_rules! input {
     }
 }
 
+// #[allow(unused_macros)]
+// macro_rules! create_function {
+//     ($func_name: ident, $input: ident, $type_input: ty) => {
+//         fn $func_name($input: $type_input) {
+//
+//         }
+//     };
+// }
+
 /// Unit test cases [`tests`]
 /// Verify and validate.
 #[cfg(test)]
 mod tests {
-    use assert_type_eq::assert_type_eq;
-
     use crate::{and_or, create_function, find_min, print_result, to_bytes/*, vector*/};
     // use crate::data_structure::AveragedCollection;
     use crate::display::coordinates;
@@ -76,6 +83,7 @@ mod tests {
     use crate::ipfs::btree_set_overload;
     use crate::lifetime::{first_word, longest, longest_with_an_announcement, Rectangle};
     use crate::reliability::fault_tolerance::tolerate_fault;
+    use crate::thread_pool::{channels, thread_spawn};
 
     /// [`String`] is a [`Vec`] array of [`byte`].
     #[test]
@@ -543,5 +551,15 @@ mod tests {
     #[test]
     fn test_functional_macro_sum() {
         assert_eq!(sum!(2, 3), 5);
+    }
+
+    #[test]
+    fn test_thread_spawn() {
+        thread_spawn();
+    }
+
+    #[test]
+    fn test_channels() {
+        channels();
     }
 }
