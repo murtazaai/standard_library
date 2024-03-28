@@ -83,7 +83,7 @@ mod tests {
     use crate::ipfs::btree_set_overload;
     use crate::lifetime::{first_word, longest, longest_with_an_announcement, Rectangle};
     use crate::reliability::fault_tolerance::tolerate_fault;
-    use crate::thread_pool::{channels, thread_spawn};
+    use crate::thread_pool::{channels, multithreading_with_barriers, multithreading_with_mutex, scoped_threads, thread_spawn, threads_with_locking};
 
     /// [`String`] is a [`Vec`] array of [`byte`].
     #[test]
@@ -561,5 +561,25 @@ mod tests {
     #[test]
     fn test_channels() {
         channels();
+    }
+
+    #[test]
+    fn test_threads_with_locking() {
+        threads_with_locking();
+    }
+
+    #[test]
+    fn test_multithreading_with_mutex() {
+        assert_eq!(multithreading_with_mutex(), 10);
+    }
+
+    #[test]
+    fn test_multithreading_with_barriers() {
+        multithreading_with_barriers();
+    }
+
+    #[test]
+    fn test_scoped_threads() {
+        scoped_threads();
     }
 }

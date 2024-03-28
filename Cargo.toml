@@ -184,6 +184,7 @@ http = "0.2.9"
 assert-type-eq = "0.1.0"
 env-file-reader = "0.3.0"
 negative-impl = "0.1.4"
+tokio = "1.37.0"
 
 # standard crate data is left out
 [dev-dependencies] #Dependencies for examples, tests, and benchmarks.
