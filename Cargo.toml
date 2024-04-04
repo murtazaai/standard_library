@@ -185,6 +185,7 @@ assert-type-eq = "0.1.0"
 env-file-reader = "0.3.0"
 negative-impl = "0.1.4"
 tokio = "1.37.0"
+regex = "1.10.4"
 
 # standard crate data is left out
 [dev-dependencies] #Dependencies for examples, tests, and benchmarks.

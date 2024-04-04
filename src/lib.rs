@@ -26,6 +26,8 @@ pub mod macros;
 pub mod file;
 pub mod lifetime;
 pub mod display;
+mod regex;
+mod strings;
 
 #[allow(dead_code)]
 pub fn sort(array: &mut Vec<i32>) {
@@ -82,7 +84,9 @@ mod tests {
     use crate::generic::{Circle, Draw, f0, Point, Shape};
     use crate::ipfs::btree_set_overload;
     use crate::lifetime::{first_word, longest, longest_with_an_announcement, Rectangle};
+    use crate::regex::{regex, string_literals};
     use crate::reliability::fault_tolerance::tolerate_fault;
+    use crate::strings::{string_concat};
     use crate::thread_pool::{channels, multithreading_with_barriers, multithreading_with_mutex, scoped_threads, thread_spawn, threads_with_locking};
 
     /// [`String`] is a [`Vec`] array of [`byte`].
@@ -581,5 +585,20 @@ mod tests {
     #[test]
     fn test_scoped_threads() {
         scoped_threads();
+    }
+
+    #[test]
+    fn test_regex() {
+        regex();
+    }
+
+    #[test]
+    fn test_string_literals() {
+        string_literals();
+    }
+
+    #[test]
+    fn test_string_concat() {
+        string_concat();
     }
 }
